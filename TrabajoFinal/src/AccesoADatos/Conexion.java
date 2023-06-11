@@ -15,6 +15,7 @@ public class Conexion {
     private static final String PASSWORD="";
 
     private static Connection connection;
+    
    
     
     //Metodo constructor
