@@ -8,7 +8,7 @@ import Modelo.Proyecto;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 
-public class Main {
+public class Prueba {
 
     public static void main(String[] args) {
         Connection c = null;

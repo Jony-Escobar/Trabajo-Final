@@ -96,8 +96,7 @@ public class ProyectoData {
             if(fila==1){
                 JOptionPane.showMessageDialog(null, " Se activo el proyecto.");
             }
-        ps.close();    
-
+            ps.close();    
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Proyecto");
