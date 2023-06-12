@@ -41,4 +41,21 @@ public class ComentariosData {
         }
     }
     
+    public void eliminarComentarios(int idComentario){
+        
+    try {
+        String sql = "DELETE FROM comentarios WHERE `comentarios`.`idComentario` = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idComentario);
+        int fila=ps.executeUpdate();
+          
+        if(fila==1){
+            JOptionPane.showMessageDialog(null, " Se elimino el comentario.");
+        }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla comentarios");
+        }
+    }
+    
 }
