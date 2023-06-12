@@ -57,11 +57,12 @@ public class ProyectoData {
                 proyecto.setDescripcion(rs.getString("descripcion"));
                 proyecto.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
                 proyecto.setEstado(rs.getInt("estado"));
+                ps.close();
                 } 
             else {
                 JOptionPane.showMessageDialog(null, "No existe ese proyecto");
             }
-            ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Proyecto "+ex.getMessage());
         }
@@ -82,7 +83,7 @@ public class ProyectoData {
             }
               ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla equipoMiembros");
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Proyecto");
         }
   }
   
@@ -105,33 +106,3 @@ public class ProyectoData {
   
   
 }
-
-/*
-Alumno alumno = null;
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE dni=? AND estado = 1";
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1,dni );
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                alumno=new Alumno();
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                alumno.setDni(rs.getInt("dni"));
-                alumno.setApellido(rs.getString("apellido"));
-                alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setEstado(rs.getInt("estado"));
-            
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
-        }
-
-        return alumno;
-    }
-*/
