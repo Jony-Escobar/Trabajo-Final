@@ -1,4 +1,4 @@
-package TareaData;
+package AccesoADatos;
 
 import Modelo.Tarea;
 import java.sql.Connection;
@@ -45,3 +45,4 @@ public void guardarTarea(Tarea tarea){
 }
     
 }
+
