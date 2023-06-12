@@ -3,6 +3,7 @@ package AccesoADatos;
 import Modelo.Miembro;
 import Modelo.Proyecto;
 import Modelo.Equipo;
+import Modelo.EquiposMiembros;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -25,7 +26,11 @@ public class Prueba {
         for(Equipo e: listaEquipos){
             System.out.println(e.toString());
         }
-        
+        EquipoMiembrosData eqMiData= new EquipoMiembrosData();
+        EquiposMiembros equipoMiembro= new EquiposMiembros(fecha,2,1,"desarrollador");
+        eqMiData.guardarEquipoMiembros(equipoMiembro);
+        equipoMiembro= eqMiData.buscarEquipoMiembros(2);
+        equipoMiembro.toString();
         
         //LocalDate fecha= LocalDate.of(2023,06,10);
         Proyecto proyecto= new Proyecto("Stock","Empresa",fecha,1);

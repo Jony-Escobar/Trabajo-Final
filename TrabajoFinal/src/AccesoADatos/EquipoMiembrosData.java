@@ -2,6 +2,7 @@
 package AccesoADatos;
 
 import Modelo.EquiposMiembros;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,12 @@ import javax.swing.JOptionPane;
 
 
 public class EquipoMiembrosData {
+    
+    private Connection con= null;
+    
+    public EquipoMiembrosData(){
+     con= Conexion.getConexion();
+    }
     
     public void guardarEquipoMiembros(EquiposMiembros equipomiembros){
         
@@ -38,7 +45,7 @@ public class EquipoMiembrosData {
             ps.close();
             
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comentarios"+ex.getMessage());
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla equipomiembros"+ex.getMessage());
         }
     }
     

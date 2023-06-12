@@ -23,19 +23,13 @@ public class Conexion {
     
     
 public static Connection getConexion() {
-        //TENES LA LIBRERIA IMPORTADA? el mariadb.cliente.jar?
-       
+               
         if (connection == null) {
             
             try {
-//                Class.forName("org.mariadb.jdbc.Driver");
                 Class.forName("com.mysql.jdbc.Driver");
-                // Setup the connection with the DB
-               // connection= DriverManager.getConnection("jdbc:mariadb:mysql://localhost/universidad", "root", "");
                 connection= DriverManager.getConnection("jdbc:mysql://localhost/empresa", "root", "");
-                //connection = DriverManager
-                    //    .getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"
-                      //          + "&user=" + USUARIO + "&password=" + PASSWORD);
+                
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la BD con el nuevo driver " + ex);
             }catch(ClassNotFoundException ex){

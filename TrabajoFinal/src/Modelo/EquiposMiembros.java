@@ -13,6 +13,14 @@ public class EquiposMiembros {
     public EquiposMiembros() {
     }
 
+    public EquiposMiembros(LocalDate fechaIncorporacion, int idEquipo, int idMiembro, String rol) {
+        this.fechaIncorporacion = fechaIncorporacion;
+        this.idEquipo = idEquipo;
+        this.idMiembro = idMiembro;
+        this.rol= rol;
+    }
+
+       
     public EquiposMiembros(int idMiembroEq, LocalDate fechaIncorporacion, int idEquipo, int idMiembro, String rol) {
         this.idMiembroEq = idMiembroEq;
         this.fechaIncorporacion = fechaIncorporacion;
