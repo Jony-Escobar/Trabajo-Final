@@ -13,6 +13,15 @@ public class Equipo {
     
     public Equipo(){}
 
+    public Equipo(int idProyecto, String nombre, LocalDate fechaCreacion, int estado) {
+        this.idProyecto = idProyecto;
+        this.nombre = nombre;
+        this.fechaCreacion = fechaCreacion;
+        this.estado = estado;
+    }
+
+    
+    
     public Equipo(int idEquipo, int idProyecto, String nombre, LocalDate fechaCreacion, int estado) {
         this.idEquipo = idEquipo;
         this.idProyecto = idProyecto;
