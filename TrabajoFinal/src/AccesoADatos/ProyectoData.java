@@ -104,5 +104,31 @@ public class ProyectoData {
         }
     }
   
+  public void modificarProyecto(Proyecto proyecto) {
+
+        String sql = "UPDATE proyecto SET idProyecto = ? , nombre = ?, descripcion = ?, fechaInicio = ?, estado = ? WHERE  idProyecto = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, proyecto.getIdProyecto());
+            ps.setString(2, proyecto.getNombre());
+            ps.setString(3, proyecto.getDescripcion());
+            ps.setDate(4, Date.valueOf(proyecto.getFechaInicio()));
+            ps.setInt(5, proyecto.getEstado());
+            
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Proyecto modificado Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El proyecto no existe");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla proyecto");
+        }
+        
+    }
   
 }
