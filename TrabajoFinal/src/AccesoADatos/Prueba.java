@@ -16,7 +16,7 @@ public class Prueba {
     public static void main(String[] args) {
         Connection c = null;
         c= Conexion.getConexion();
-        LocalDate fecha= LocalDate.of(2022,10,30);
+        LocalDate fecha= LocalDate.of(2022,10,22);
         
         EquipoData equiData= new EquipoData();
         //Equipo equipo= new Equipo(1,"Testing",fecha,1);
@@ -28,17 +28,17 @@ public class Prueba {
         
         
         //LocalDate fecha= LocalDate.of(2023,06,10);
-        Proyecto proyecto= new Proyecto("Sistema Alumnos","SIU Guarani",fecha,1);
+        Proyecto proyecto= new Proyecto("Stock","Empresa",fecha,1);
         ProyectoData proyData = new ProyectoData();
         proyData.guardarProyecto(proyecto);
-        //Proyecto buscado= proyData.buscarProyecto(1);
-        //buscado.toString();
-        //Component cmpnt = null;
-        //JOptionPane.showMessageDialog(cmpnt, buscado.toString());
-        Miembro a= new Miembro(33500400,"Dominguez","Nicolas",1);
-        MiembroData mdata= new MiembroData();
-        mdata.guardarMiembro(a);
-        JOptionPane.showMessageDialog(cmpnt, a.toString());
+        Proyecto buscado= proyData.buscarProyecto(1);
+        buscado.toString();
+        Component cmpnt = null;
+        JOptionPane.showMessageDialog(cmpnt, buscado.toString());
+        //Miembro a= new Miembro(33500400,"Dominguez","Nicolas",1);
+        //MiembroData mdata= new MiembroData();
+        //mdata.guardarMiembro(a);
+        //JOptionPane.showMessageDialog(cmpnt, a.toString());
     }
     
 }
