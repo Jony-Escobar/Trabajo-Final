@@ -39,6 +39,6 @@ public class ComentariosData {
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comentarios"+ex.getMessage());
         }
-  }
+    }
     
 }
