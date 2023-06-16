@@ -1,5 +1,6 @@
 package AccesoADatos;
 
+/*
 import Modelo.Miembro;
 import Modelo.Proyecto;
 import Modelo.Equipo;
@@ -46,4 +47,4 @@ public class Prueba {
         //JOptionPane.showMessageDialog(cmpnt, a.toString());
     }
     
-}
+}*/
