@@ -12,6 +12,10 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -24,8 +28,19 @@ public class Principal extends javax.swing.JFrame {
         menuItemListaProyectos = new javax.swing.JMenuItem();
         menuItemTareas = new javax.swing.JMenuItem();
         menuItemInformacionDeEquipo = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenu3.setText("jMenu3");
+
+        jMenu5.setText("File");
+        jMenuBar2.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar2.add(jMenu6);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -33,11 +48,11 @@ public class Principal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 268, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Proyecto");
@@ -55,6 +70,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Tareas");
 
         menuItemAsignarTarea.setText("Asignar tarea");
+        menuItemAsignarTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAsignarTareaActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuItemAsignarTarea);
 
         menuItemActualizarEstadoTarea.setText("Actualizar estado de tarea");
@@ -68,6 +88,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu7.setText("Consultar");
 
         menuItemListaProyectos.setText("Lista de proyectos");
+        menuItemListaProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemListaProyectosActionPerformed(evt);
+            }
+        });
         jMenu7.add(menuItemListaProyectos);
 
         menuItemTareas.setText("Tareas");
@@ -78,17 +103,37 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu4.setText("Equipo");
+
+        jMenuItem2.setText("Crear Equipo");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu8.setText("Miembro");
+        jMenuBar1.add(jMenu8);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(escritorio)
+                .addContainerGap())
         );
 
         pack();
@@ -102,6 +147,24 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(vcp);
         escritorio.moveToFront(vcp);
     }//GEN-LAST:event_menuItemCrearProyectoActionPerformed
+
+    private void menuItemListaProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListaProyectosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemListaProyectosActionPerformed
+
+    private void menuItemAsignarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAsignarTareaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemAsignarTareaActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaEquipo ve = new VistaEquipo();
+        ve.setVisible(true);
+        escritorio.add(ve);
+        escritorio.moveToFront(ve);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     public static void main(String args[]) {
@@ -140,9 +203,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem menuItemActualizarEstadoTarea;
     private javax.swing.JMenuItem menuItemAsignarTarea;
     private javax.swing.JMenuItem menuItemCrearProyecto;

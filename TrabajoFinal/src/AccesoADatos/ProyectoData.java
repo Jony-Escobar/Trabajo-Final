@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Modelo.Proyecto;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProyectoData {
@@ -70,6 +72,32 @@ public class ProyectoData {
         return proyecto;
                 
   }
+  
+  public List<Proyecto> listarProyectos() {
+
+        List<Proyecto> proyectos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM proyecto WHERE estado = 1 ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proyecto proy = new Proyecto();
+
+                proy.setIdProyecto(rs.getInt("idProyecto"));
+                proy.setNombre(rs.getString("nombre"));
+                //proy.setDescripcion(rs.getString("descripcion"));
+                //proy.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                //proy.setEstado(rs.getInt("estado"));
+                proyectos.add(proy);
+            }
+            ps.close();
+           
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la Tabla Proyecto "+ex.getMessage());
+        }
+        return proyectos;
+    }
   
   public void eliminarProyecto(int idProyecto){
     try {
