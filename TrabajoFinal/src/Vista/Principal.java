@@ -33,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+        jmiMiembro = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -118,6 +119,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu8.setText("Miembro");
+
+        jmiMiembro.setText("Agregar Miembro");
+        jmiMiembro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMiembroActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jmiMiembro);
+
         jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
@@ -162,6 +172,16 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(ve);
         escritorio.moveToFront(ve);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jmiMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMiembroActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+        VistaMiembro vm = new VistaMiembro();
+        vm.setVisible(true);
+        escritorio.add(vm);
+        escritorio.moveToFront(vm);
+        
+    }//GEN-LAST:event_jmiMiembroActionPerformed
 
 
     public static void main(String args[]) {
@@ -210,6 +230,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jmiMiembro;
     private javax.swing.JMenuItem menuItemActualizarEstadoTarea;
     private javax.swing.JMenuItem menuItemAsignarTarea;
     private javax.swing.JMenuItem menuItemCrearProyecto;

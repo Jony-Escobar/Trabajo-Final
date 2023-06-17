@@ -14,11 +14,13 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
 
      DefaultTableModel modelo;
      ProyectoData proyData= new ProyectoData();
+     LocalDate localDate;
 
     public VistaEquipo() {
         initComponents();
         jrbAlta.setSelected(false);
         jrbModificar.setSelected(false);
+        //jbGuardar.setEnabled(false);
         
         
         llenarCombo();
@@ -30,6 +32,15 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
          jcbProyectos.addItem(proy);
   }
     }
+    
+    public boolean verificar(){
+    if((jrbAlta.isSelected()==true) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty()) ){
+        
+        return true;
+    }
+    else{
+        return false;
+    }}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -197,15 +208,25 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        int validar=0;
+//        if(jrbAlta.isSelected()==true){
+//        validar++;
+//        }
         EquipoData equiData= new EquipoData();
         Equipo equipo= new Equipo();
         ProyectoData proyData= new ProyectoData();
         Proyecto proyecto= new Proyecto();
         proyecto= (Proyecto) jcbProyectos.getSelectedItem();
-        
+//        if(jcbProyectos.getSelectedItem()!=null){
+//        validar++;}
         equipo.setIdProyecto(proyecto.getIdProyecto());
         equipo.setNombre(jtfNombre.getText());
-        LocalDate localDate = jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        if(!jtfNombre.getText().isEmpty()){
+//        validar++;}
+        localDate = jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        if(!localDate.toString().isEmpty()){
+//        validar++;
+//        }
         equipo.setFechaCreacion(localDate);
         if(jrbActivo.isSelected()){
          equipo.setEstado(1);
@@ -213,7 +234,11 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         else{
          equipo.setEstado(0);
         }
-        equiData.guardarEquipo(equipo);
+        if(verificar()){
+        equiData.guardarEquipo(equipo);}
+        else{
+         JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+        }
         
     }//GEN-LAST:event_jbGuardarActionPerformed
 

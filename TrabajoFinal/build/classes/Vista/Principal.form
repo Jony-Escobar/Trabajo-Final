@@ -120,6 +120,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Miembro"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiMiembro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar Miembro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiMiembroActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
