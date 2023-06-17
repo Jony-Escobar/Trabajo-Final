@@ -226,6 +226,7 @@ public class VistaCrearProyecto extends javax.swing.JInternalFrame {
         textFieldNombre.setText("");
         textFieldDescripcion.setText("");
         radioButtonEstado.setSelected(false);
+        jdcFechaCreacion.setCalendar(null);
         //SETEAR FECHA
         
     }//GEN-LAST:event_buttonLimpiarActionPerformed
