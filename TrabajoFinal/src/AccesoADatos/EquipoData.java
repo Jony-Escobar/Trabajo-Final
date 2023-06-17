@@ -42,7 +42,6 @@ public void guardarEquipo(Equipo equipo){
         }
 }
 
-
 public Equipo buscarEquipo(int idEquipo){
   
     String sql= "SELECT * FROM equipo WHERE idEquipo=?";
@@ -73,7 +72,7 @@ public Equipo buscarEquipo(int idEquipo){
     
   
 }
-    
+
 public void eliminarEquipo(int idEquipo){
   try{
     String sql = "UPDATE equipo SET estado = 0 WHERE idEquipo = ?";
