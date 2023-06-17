@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import AccesoADatos.MiembroData;
+import Modelo.Miembro;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sergio
@@ -16,7 +20,51 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
      */
     public VistaMiembro() {
         initComponents();
+        jrbAlta.setSelected(false); 
+        jrbModificar.setSelected(false);
+        jtfNombre.setEnabled(false);
+        jtfApellido.setEnabled(false);
+        jtfDni.setEnabled(false);
+        jrbActivo.setEnabled(false);
+        jrbInactivo.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        
     }
+    
+    public boolean verificar(){
+     int campos=0, validar;
+     
+     try{
+     if(jrbAlta.isSelected()){
+       
+         validar= Integer.parseInt(jtfDni.getText());
+         campos++; //1
+         if(!jtfApellido.getText().isEmpty()){
+             campos++; //2
+         }
+         if(!jtfNombre.getText().isEmpty()){
+          campos++; //3
+         }
+         if(campos==3){
+          return true;
+         }
+       }
+     else{
+       return false;
+     }
+     } catch(NumberFormatException num){
+         JOptionPane.showMessageDialog(null, "El valor ingresado no es un número"+num.getMessage());
+       }
+       catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Debe completar todos los campos"+e.getMessage());
+       }
+        return false;
+     }
+//     else{
+//      return false;
+    // }
+    
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,6 +103,11 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
         });
 
         jrbModificar.setText("Modificar");
+        jrbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbModificarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("DNI");
 
@@ -79,11 +132,22 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
         jbLimpiar.setText("Limpiar");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbCancelar.setText("Cancelar");
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCancelarActionPerformed(evt);
+            }
+        });
+
+        jtfDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfDniActionPerformed(evt);
             }
         });
 
@@ -183,12 +247,50 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
 
     private void jrbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAltaActionPerformed
         // TODO add your handling code here:
+        jrbModificar.setSelected(false);
+        jtfNombre.setEnabled(true);
+        jtfApellido.setEnabled(true);
+        jtfDni.setEnabled(true);
+        jrbActivo.setSelected(true);
+        jrbActivo.setEnabled(true);
+        jbGuardar.setEnabled(true);
     }//GEN-LAST:event_jrbAltaActionPerformed
 
+    
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        MiembroData miData= new MiembroData();
+        Miembro miembro= new Miembro();
+        if(verificar()){
+         miembro.setDni(Integer.parseInt(jtfDni.getText()));
+         miembro.setApellido(jtfApellido.getText());
+         miembro.setNombre(jtfNombre.getText());
+         miembro.setEstado(1); // siempre se da de alta un miembro como activo
+         miData.guardarMiembro(miembro);
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "Verifique los campos");
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jtfDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDniActionPerformed
+        // TODO add your handling code here:
+        try{
+        int nro= Integer.parseInt(jtfDni.getText());
+        }catch (Exception e){
+         JOptionPane.showMessageDialog(null, "El valor ingresado no es un número"+e.getMessage());
+        }
+    }//GEN-LAST:event_jtfDniActionPerformed
+
+    private void jrbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbModificarActionPerformed
+        // TODO add your handling code here:
+        jrbAlta.setSelected(false);
+    }//GEN-LAST:event_jrbModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
