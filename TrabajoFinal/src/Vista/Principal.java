@@ -149,7 +149,7 @@ public class Principal extends javax.swing.JFrame {
     private void menuItemCrearProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCrearProyectoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaCrearProyecto vcp = new VistaCrearProyecto();
+        VistaProyecto vcp = new VistaProyecto();
         vcp.setVisible(true);
         escritorio.add(vcp);
         escritorio.moveToFront(vcp);
