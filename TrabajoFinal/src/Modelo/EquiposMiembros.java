@@ -6,26 +6,26 @@ public class EquiposMiembros {
   
     private int idMiembroEq;
     private LocalDate fechaIncorporacion;
-    private int idEquipo;
-    private int idMiembro;
+    private Equipo equipo;
+    private Miembro miembro;
     private String rol;
 
     public EquiposMiembros() {
     }
 
-    public EquiposMiembros(LocalDate fechaIncorporacion, int idEquipo, int idMiembro, String rol) {
+    public EquiposMiembros(LocalDate fechaIncorporacion, Equipo equipo, Miembro miembro, String rol) {
         this.fechaIncorporacion = fechaIncorporacion;
-        this.idEquipo = idEquipo;
-        this.idMiembro = idMiembro;
+        this.equipo = equipo;
+        this.miembro = miembro;
         this.rol= rol;
     }
 
        
-    public EquiposMiembros(int idMiembroEq, LocalDate fechaIncorporacion, int idEquipo, int idMiembro, String rol) {
+    public EquiposMiembros(int idMiembroEq, LocalDate fechaIncorporacion, Equipo equipo, Miembro miembro, String rol) {
         this.idMiembroEq = idMiembroEq;
         this.fechaIncorporacion = fechaIncorporacion;
-        this.idEquipo = idEquipo;
-        this.idMiembro = idMiembro;
+        this.equipo = equipo;
+        this.miembro = miembro;
         this.rol = rol;
     }
 
@@ -45,20 +45,20 @@ public class EquiposMiembros {
         this.fechaIncorporacion = fechaIncorporacion;
     }
 
-    public int getIdEquipo() {
-        return idEquipo;
+    public Equipo getEquipo() {
+        return equipo;
     }
 
-    public void setIdEquipo(int idEquipo) {
-        this.idEquipo = idEquipo;
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 
-    public int getIdMiembro() {
-        return idMiembro;
+    public Miembro getMiembro() {
+        return miembro;
     }
 
-    public void setIdMiembro(int idMiembro) {
-        this.idMiembro = idMiembro;
+    public void setMiembro(Miembro miembro) {
+        this.miembro = miembro;
     }
 
     public String getRol() {
@@ -71,11 +71,7 @@ public class EquiposMiembros {
 
     @Override
     public String toString() {
-        return "EquiposMiembros{" + "idMiembroEq=" + idMiembroEq + ", fechaIncorporacion=" + fechaIncorporacion + ", idEquipo=" + idEquipo + ", idMiembro=" + idMiembro + ", rol=" + rol + '}';
+        return "EquiposMiembros{" + "idMiembroEq=" + idMiembroEq + ", fechaIncorporacion=" + fechaIncorporacion + ", equipo=" + equipo + ", miembro=" + miembro + ", rol=" + rol + '}';
     }
-    
-    
-    
 
-    
 }
