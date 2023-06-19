@@ -21,7 +21,31 @@ public class Conexion {
    
     public Conexion(){}
     
+    public static Connection getConexion() {
+    if (connection == null) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/empresa", "root", "");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a la BD con el nuevo driver " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los Drivers " + ex);
+        }
+    }
+    return connection;
+}
+}
+
+
+
+
+
+
+
     
+//}
+    
+/*
 public static Connection getConexion() {
                
         if (connection == null) {
@@ -41,7 +65,7 @@ public static Connection getConexion() {
     }
 
     
-}
+}*/
 
     
 
