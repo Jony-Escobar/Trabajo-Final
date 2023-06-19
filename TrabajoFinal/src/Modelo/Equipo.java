@@ -6,15 +6,15 @@ import java.time.LocalDate;
 public class Equipo {
     
     private int idEquipo;
-    private Proyecto proyecto;
+    private int idProyecto;
     private String nombre;
     private LocalDate fechaCreacion;
     private int estado;
     
     public Equipo(){}
 
-    public Equipo(Proyecto proyecto, String nombre, LocalDate fechaCreacion, int estado) {
-        this.proyecto = proyecto;
+    public Equipo(int idProyecto, String nombre, LocalDate fechaCreacion, int estado) {
+        this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.estado = estado;
@@ -22,9 +22,9 @@ public class Equipo {
 
     
     
-    public Equipo(int idEquipo, Proyecto proyecto, String nombre, LocalDate fechaCreacion, int estado) {
+    public Equipo(int idEquipo, int idProyecto, String nombre, LocalDate fechaCreacion, int estado) {
         this.idEquipo = idEquipo;
-        this.proyecto = proyecto;
+        this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.estado = estado;
@@ -38,12 +38,12 @@ public class Equipo {
         this.idEquipo = idEquipo;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public String getNombre() {
@@ -72,7 +72,7 @@ public class Equipo {
 
     @Override
     public String toString() {
-        return "Equipo{" + "idEquipo=" + idEquipo + ", proyecto=" + proyecto + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + '}';
+        return "Equipo{" + "idEquipo=" + idEquipo + ", idProyecto=" + idProyecto + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + '}';
     }
     
     

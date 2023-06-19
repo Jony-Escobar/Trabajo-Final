@@ -7,16 +7,16 @@ public class Comentarios {
 private int idComentario;
 private String comentario;
 private LocalDate fechaAvance;
-private Tarea tarea;
+private int idTarea;
 
     public Comentarios() {
     }
 
-    public Comentarios(int idComentario, String comentario, LocalDate fechaAvance, Tarea tarea) {
+    public Comentarios(int idComentario, String comentario, LocalDate fechaAvance, int idTarea) {
         this.idComentario = idComentario;
         this.comentario = comentario;
         this.fechaAvance = fechaAvance;
-        this.tarea = tarea;
+        this.idTarea = idTarea;
     }
 
     public int getIdComentario() {
@@ -43,17 +43,17 @@ private Tarea tarea;
         this.fechaAvance = fechaAvance;
     }
 
-    public Tarea getTarea() {
-        return tarea;
+    public int getIdTarea() {
+        return idTarea;
     }
 
-    public void setTarea(Tarea tarea) {
-        this.tarea = tarea;
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
     }
 
     @Override
     public String toString() {
-        return "Comentarios{" + "idComentario=" + idComentario + ", comentario=" + comentario + ", fechaAvance=" + fechaAvance + ", tarea=" + tarea + '}';
+        return "Comentarios{" + "idComentario=" + idComentario + ", comentario=" + comentario + ", fechaAvance=" + fechaAvance + ", idTarea=" + idTarea + '}';
     }
     
     
