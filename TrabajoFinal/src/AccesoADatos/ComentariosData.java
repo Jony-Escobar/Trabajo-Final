@@ -10,7 +10,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class ComentariosData {
-    
+    //prueba
     private Connection con = null;
 
     public ComentariosData() {

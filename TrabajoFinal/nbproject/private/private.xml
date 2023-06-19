@@ -3,20 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Vista/VistaMiembro.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Modelo/Proyecto.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Modelo/EquiposMiembros.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Vista/VistaCrearProyecto.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/Conexion.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Vista/VistaEquipo.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/ProyectoData.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/MiembroData.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/EquipoData.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/Prueba.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Modelo/Equipo.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Vista/Principal.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/Modelo/Miembro.java</file>
-            <file>file:/C:/Users/Sergio/Documents/GitHub/Trabajo-Final/TrabajoFinal/src/AccesoADatos/EquipoMiembrosData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Trabajo-Final/TrabajoFinal/src/Modelo/Equipo.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Trabajo-Final/TrabajoFinal/src/AccesoADatos/ComentariosData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Trabajo-Final/TrabajoFinal/src/Modelo/Comentarios.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Trabajo-Final/TrabajoFinal/src/Vista/VistaEquipo.java</file>
         </group>
     </open-files>
 </project-private>
