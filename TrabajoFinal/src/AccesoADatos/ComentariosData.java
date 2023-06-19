@@ -26,7 +26,7 @@ public class ComentariosData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, comentarios.getComentario());
             ps.setDate(2, Date.valueOf(comentarios.getFechaAvance()));
-            ps.setInt(3, comentarios.getIdTarea());
+            ps.setInt(3, comentarios.getTarea().getIdTarea());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
