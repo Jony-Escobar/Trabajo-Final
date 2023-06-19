@@ -9,18 +9,18 @@ private String nombre;
 private LocalDate fechaCreacion;
 private LocalDate fechaCierre;
 private int estado;
-private int idMiembroEq;
+private EquiposMiembros miembroEq;
 
     public Tarea() {
     }
 
-    public Tarea(int idTarea, String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, int estado, int idMiembroEq) {
+    public Tarea(int idTarea, String nombre, LocalDate fechaCreacion, LocalDate fechaCierre, int estado, EquiposMiembros miembroEq) {
         this.idTarea = idTarea;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.fechaCierre = fechaCierre;
         this.estado = estado;
-        this.idMiembroEq = idMiembroEq;
+        this.miembroEq = miembroEq;
     }
 
     public int getIdTarea() {
@@ -63,22 +63,17 @@ private int idMiembroEq;
         this.estado = estado;
     }
 
-    public int getIdMiembroEq() {
-        return idMiembroEq;
+    public EquiposMiembros getMiembroEq() {
+        return miembroEq;
     }
 
-    public void setIdMiembroEq(int idMiembroEq) {
-        this.idMiembroEq = idMiembroEq;
+    public void setMiembroEq(EquiposMiembros miembroEq) {
+        this.miembroEq = miembroEq;
     }
 
     @Override
     public String toString() {
-        return "Tarea{" + "idTarea=" + idTarea + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", idMiembroEq=" + idMiembroEq + '}';
+        return "Tarea{" + "idTarea=" + idTarea + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", miembroEq=" + miembroEq + '}';
     }
-
-
-    
-
-        
     
 }
