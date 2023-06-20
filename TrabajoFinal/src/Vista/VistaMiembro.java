@@ -39,9 +39,8 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
     
     public boolean verificar(){
      int campos=0, validar;
-     
      try{
-     if(jrbAlta.isSelected()){
+     if(jrbAlta.isSelected() || jrbModificar.isSelected()){
        
          validar= Integer.parseInt(jtfDni.getText());
          campos++; //1
@@ -56,7 +55,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
          }
        }
      else{
-       return false;
+       return false; // return false
      }
      } catch(NumberFormatException num){
          JOptionPane.showMessageDialog(null, "El valor ingresado no es un número"+num.getMessage());
@@ -64,6 +63,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
        catch(Exception e){
         JOptionPane.showMessageDialog(null, "Debe completar todos los campos"+e.getMessage());
        }
+        //return false; //return false
         return false;
      }
 
@@ -101,9 +101,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
           JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del miembro");
          }
         }
-        //else{
-        //  JOptionPane.showMessageDialog(null, "Verifique los campos");
-        //}
+        
     }
     
     /**
@@ -132,6 +130,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtfApellido = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jbModificarMiembro = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("MIEMBRO");
@@ -171,6 +170,11 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
         });
 
         jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,6 +205,13 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
             }
         });
 
+        jbModificarMiembro.setText("Modificar Miembro");
+        jbModificarMiembro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarMiembroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,7 +228,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 35, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jbLimpiar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbGuardar)
@@ -237,8 +248,10 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
                         .addGap(75, 75, 75))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbModificarMiembro)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -263,7 +276,8 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscar))
+                    .addComponent(jbBuscar)
+                    .addComponent(jbModificarMiembro))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -302,13 +316,16 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
 
     private void jrbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAltaActionPerformed
         // TODO add your handling code here:
+        
         jrbModificar.setSelected(false);
         jtfNombre.setEnabled(true);
         jtfApellido.setEnabled(true);
         jtfDni.setEnabled(true);
         jrbActivo.setSelected(true);
         jrbActivo.setEnabled(true);
+        jbBuscar.setEnabled(false);
         jbGuardar.setEnabled(true);
+        jbModificarMiembro.setEnabled(false);
     }//GEN-LAST:event_jrbAltaActionPerformed
 
     
@@ -319,13 +336,13 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         
-        if(jrbAlta.isSelected()){
+       // if(jrbAlta.isSelected()){
          darAltaMiembro();
-        }
-        else{
-         modificarMiembro();
+        //}
+        //else{
+        // modificarMiembro();
          
-        }
+        
         
         
 //        if(verificar() && jrbAlta.isSelected()){
@@ -338,7 +355,6 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
 //        else{
 //          JOptionPane.showMessageDialog(null, "Verifique los campos");
 //
-//        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtfDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDniActionPerformed
@@ -351,9 +367,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDniActionPerformed
 
     private void jrbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbModificarActionPerformed
-        // TODO add your handling code here:
-        //int nro;
-        
+              
         jrbAlta.setSelected(false);
         jrbAlta.setEnabled(false);
         jbBuscar.setEnabled(true);
@@ -367,10 +381,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbModificarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
-//       Miembro miembro=new Miembro();
-//       MiembroData miData= new MiembroData();
-       jbGuardar.setEnabled(true);
+       jbGuardar.setEnabled(false);
        jtfApellido.setEnabled(true);
        jtfNombre.setEnabled(true);
        jrbActivo.setEnabled(true);
@@ -399,6 +410,40 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    private void jbModificarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarMiembroActionPerformed
+       try{
+       if(!jtfDni.getText().isEmpty() && !jtfApellido.getText().isEmpty() && !jtfNombre.getText().isEmpty()){    
+          miembro.setDni(Integer.parseInt(jtfDni.getText()));
+          miembro.setApellido(jtfApellido.getText());
+          miembro.setNombre(jtfNombre.getText());
+          if(jrbActivo.isSelected()){
+            miembro.setEstado(1);
+           }
+          else{
+            miembro.setEstado(0);
+           }
+       miData.modificarMiembro(miembro);
+    }//GEN-LAST:event_jbModificarMiembroActionPerformed
+       else{
+        JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+       }
+       }
+       catch(Exception e){
+      JOptionPane.showMessageDialog(null, "El valor ingresado no es numerico"+e.getMessage());  
+    }}
+    
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        jrbAlta.setEnabled(true);
+        jrbAlta.setSelected(false);
+        jrbModificar.setSelected(false);
+        jtfDni.setText(" ");
+        jtfApellido.setText(" ");
+        jtfNombre.setText(" ");
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(false);
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -411,6 +456,7 @@ public class VistaMiembro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbModificarMiembro;
     private javax.swing.JRadioButton jrbActivo;
     private javax.swing.JRadioButton jrbAlta;
     private javax.swing.JRadioButton jrbInactivo;
