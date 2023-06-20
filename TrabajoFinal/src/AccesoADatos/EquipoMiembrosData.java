@@ -83,8 +83,12 @@ public class EquipoMiembrosData {
                     equiposmiembros = new EquiposMiembros();
                     equiposmiembros.setIdMiembroEq(rs.getInt("idMiembroEq"));
                     equiposmiembros.setFechaIncorporacion(rs.getDate("fechaIncorporacion").toLocalDate());
-                    equiposmiembros.setIdEquipo(rs.getInt("idEquipo"));
-                    equiposmiembros.setIdMiembro(rs.getInt("idMiembro"));
+                    //equiposmiembros.setIdEquipo(rs.getInt("idEquipo"));
+                    //equiposmiembros.setIdMiembro(rs.getInt("idMiembro"));
+                    EquipoData ed = new EquipoData();
+                    MiembroData md = new MiembroData();
+                    equiposmiembros.setEquipo(ed.buscarEquipo(rs.getInt("idMiembroEq")));
+                    equiposmiembros.setMiembro(md.buscarMiembro(rs.getInt("idMiembro")));
                     equiposmiembros.setRol(rs.getString("rol"));
                      
                 }else {
@@ -118,8 +122,12 @@ public class EquipoMiembrosData {
 
                 EM.setIdMiembroEq(rs.getInt("idMiembroEq"));
                 EM.setFechaIncorporacion(rs.getDate("fechaIncorporacion").toLocalDate());
-                EM.setIdEquipo(rs.getInt("idEquipo"));
-                EM.setIdMiembro(rs.getInt("idMiembro"));
+                //EM.setIdEquipo(rs.getInt("idEquipo"));
+                //EM.setIdMiembro(rs.getInt("idMiembro"));
+                EquipoData ed = new EquipoData();
+                MiembroData md = new MiembroData();
+                EM.setEquipo(ed.buscarEquipo(rs.getInt("idMiembroEq")));
+                EM.setMiembro(md.buscarMiembro(rs.getInt("idMiembro")));
                 EM.setRol(rs.getString("rol"));
                 equiposmiembros.add(EM);
                 

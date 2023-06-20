@@ -55,7 +55,9 @@ public Equipo buscarEquipo(int idEquipo){
             if (rs.next()) {
                 equipo= new Equipo();
                 equipo.setIdEquipo(rs.getInt("idPEquipo"));
-                equipo.setIdProyecto(rs.getInt("idProyecto"));
+                //equipo.setIdProyecto(rs.getInt("idProyecto"));
+                ProyectoData pd = new ProyectoData();
+                equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
                 equipo.setNombre(rs.getString("nombre"));
                 equipo.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
                 equipo.setEstado(rs.getInt("estado"));
@@ -118,7 +120,9 @@ public List<Equipo> recuperarEquipos(){
                 Equipo equipo = new Equipo();
 
                 equipo.setIdEquipo(rs.getInt("idEquipo"));
-                equipo.setIdProyecto(rs.getInt("idProyecto"));
+                //equipo.setIdProyecto(rs.getInt("idProyecto"));
+                ProyectoData pd = new ProyectoData();
+                equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
                 equipo.setNombre(rs.getString("nombre"));
                 equipo.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
                 equipo.setEstado(rs.getInt("estado"));
