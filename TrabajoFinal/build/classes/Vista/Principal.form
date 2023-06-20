@@ -81,23 +81,21 @@
             <Property name="text" type="java.lang.String" value="Consultar"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemListaProyectos">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemProyectoTareas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lista de proyectos"/>
+                <Property name="text" type="java.lang.String" value="Proyectos y tareas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemListaProyectosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemProyectoTareasActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemTareas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tareas"/>
-              </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemInformacionDeEquipo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Informaci&#xf3;n de equipo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemInformacionDeEquipoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -27,8 +27,7 @@ public class Principal extends javax.swing.JFrame {
         menuItemActualizarEstadoTarea = new javax.swing.JMenuItem();
         menuItemRegistrarAvance = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        menuItemListaProyectos = new javax.swing.JMenuItem();
-        menuItemTareas = new javax.swing.JMenuItem();
+        menuItemProyectoTareas = new javax.swing.JMenuItem();
         menuItemInformacionDeEquipo = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -90,18 +89,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu7.setText("Consultar");
 
-        menuItemListaProyectos.setText("Lista de proyectos");
-        menuItemListaProyectos.addActionListener(new java.awt.event.ActionListener() {
+        menuItemProyectoTareas.setText("Proyectos y tareas");
+        menuItemProyectoTareas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemListaProyectosActionPerformed(evt);
+                menuItemProyectoTareasActionPerformed(evt);
             }
         });
-        jMenu7.add(menuItemListaProyectos);
-
-        menuItemTareas.setText("Tareas");
-        jMenu7.add(menuItemTareas);
+        jMenu7.add(menuItemProyectoTareas);
 
         menuItemInformacionDeEquipo.setText("Información de equipo");
+        menuItemInformacionDeEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemInformacionDeEquipoActionPerformed(evt);
+            }
+        });
         jMenu7.add(menuItemInformacionDeEquipo);
 
         jMenuBar1.add(jMenu7);
@@ -155,9 +156,14 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vcp);
     }//GEN-LAST:event_menuItemCrearProyectoActionPerformed
 
-    private void menuItemListaProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListaProyectosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuItemListaProyectosActionPerformed
+    private void menuItemProyectoTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemProyectoTareasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaConsultasProyectoTarea vcpt = new VistaConsultasProyectoTarea();
+        vcpt.setVisible(true);
+        escritorio.add(vcpt);
+        escritorio.moveToFront(vcpt);
+    }//GEN-LAST:event_menuItemProyectoTareasActionPerformed
 
     private void menuItemAsignarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAsignarTareaActionPerformed
         // TODO add your handling code here:
@@ -182,6 +188,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vm);
         
     }//GEN-LAST:event_jmiMiembroActionPerformed
+
+    private void menuItemInformacionDeEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInformacionDeEquipoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaConsultasEquipo vce = new VistaConsultasEquipo();
+        vce.setVisible(true);
+        escritorio.add(vce);
+        escritorio.moveToFront(vce);
+    }//GEN-LAST:event_menuItemInformacionDeEquipoActionPerformed
 
 
     public static void main(String args[]) {
@@ -235,8 +250,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemAsignarTarea;
     private javax.swing.JMenuItem menuItemCrearProyecto;
     private javax.swing.JMenuItem menuItemInformacionDeEquipo;
-    private javax.swing.JMenuItem menuItemListaProyectos;
+    private javax.swing.JMenuItem menuItemProyectoTareas;
     private javax.swing.JMenuItem menuItemRegistrarAvance;
-    private javax.swing.JMenuItem menuItemTareas;
     // End of variables declaration//GEN-END:variables
 }

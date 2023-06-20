@@ -1,8 +1,8 @@
 package Vista;
 
-public class VistaConsultas extends javax.swing.JInternalFrame {
+public class VistaConsultasProyectoTarea extends javax.swing.JInternalFrame {
 
-    public VistaConsultas() {
+    public VistaConsultasProyectoTarea() {
         initComponents();
     }
 
