@@ -25,7 +25,7 @@ public void guardarEquipo(Equipo equipo){
         try {
             String sql = "INSERT INTO equipo (idProyecto, nombre, fechaCreacion, estado) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, equipo.getIdProyecto());
+            ps.setInt(1, equipo.getProyecto().getIdProyecto());
             ps.setString(2, equipo.getNombre());
             ps.setDate(3, Date.valueOf(equipo.getFechaCreacion()));//localDate a Date
             ps.setInt(4, equipo.getEstado());
