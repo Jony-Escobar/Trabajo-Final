@@ -4,6 +4,7 @@ import AccesoADatos.ProyectoData;
 import AccesoADatos.EquipoData;
 import Modelo.Proyecto;
 import Modelo.Equipo;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -15,6 +16,9 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
      DefaultTableModel modelo;
      ProyectoData proyData= new ProyectoData();
      LocalDate localDate;
+     Equipo equipo= new Equipo();
+     EquipoData equiData= new EquipoData();
+     
 
     public VistaEquipo() {
         initComponents();
@@ -63,10 +67,12 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jrbActivo = new javax.swing.JRadioButton();
         jrbInactivo = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
+        jbBuscar = new javax.swing.JButton();
+        jbModificarEquipo = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EQUIPO");
@@ -124,6 +130,20 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado");
 
+        jbBuscar.setText("Buscar Equipo");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jbModificarEquipo.setText("Modificar Equipo");
+        jbModificarEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarEquipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,44 +156,52 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(jrbAlta)
+                            .addComponent(jbLimpiar))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbActivo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrbInactivo)))
-                        .addGap(28, 28, 28))
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jrbActivo)
+                                            .addGap(30, 30, 30)
+                                            .addComponent(jrbInactivo))
+                                        .addComponent(jdcFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jrbModificar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbBuscar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jbModificarEquipo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addComponent(jbGuardar)
+                                        .addGap(69, 69, 69)
+                                        .addComponent(jbCancelar))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jrbAlta)
-                        .addGap(140, 140, 140)
-                        .addComponent(jrbModificar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jbLimpiar)
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbGuardar)
-                        .addGap(89, 89, 89)
-                        .addComponent(jbCancelar)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(204, 204, 204)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbAlta)
-                    .addComponent(jrbModificar))
+                    .addComponent(jrbModificar)
+                    .addComponent(jbBuscar)
+                    .addComponent(jbModificarEquipo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -257,9 +285,14 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     private void jrbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbModificarActionPerformed
         // TODO add your handling code here:
         jrbAlta.setSelected(false);
-        jrbInactivo.setEnabled(true);
+        jrbInactivo.setEnabled(false);
         jrbInactivo.setSelected(false);
         jrbActivo.setSelected(false);
+        jtfNombre.setEnabled(false);
+        jdcFechaCreacion.setEnabled(false);
+        jrbActivo.setEnabled(false);
+        jrbInactivo.setEnabled(false);
+        jbModificarEquipo.setEnabled(false);
     }//GEN-LAST:event_jrbModificarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -273,6 +306,57 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jrbInactivo.setSelected(false);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        
+        //Activo los campos del equipo para su modificación
+        jtfNombre.setEnabled(true);
+        jdcFechaCreacion.setEnabled(true);
+        jrbActivo.setEnabled(true);
+        jrbInactivo.setEnabled(true);
+        jbGuardar.setEnabled(false);
+        
+        
+        Proyecto proyecto= new Proyecto();
+        proyecto= (Proyecto) jcbProyectos.getSelectedItem();
+        //Equipo equipo= new Equipo();
+        //EquipoData equiData= new EquipoData();
+        equipo= equiData.buscarEquipoProyecto(proyecto.getIdProyecto());
+        if(equipo!=null){
+         jbModificarEquipo.setEnabled(true);
+        }
+        jtfNombre.setText(equipo.getNombre());
+        LocalDate local = equipo.getFechaCreacion();
+        Instant instant = local.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        Date date = Date.from(instant);
+        //jdcFechaCreacion.setDate(java.sql.Date.valueOf(equipo.getFechaCreacion()));
+        jdcFechaCreacion.setDate(date);
+        if(equipo.getEstado()==1){
+         jrbActivo.setSelected(true);
+        }
+        else{
+         jrbInactivo.setSelected(true);
+        }
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbModificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarEquipoActionPerformed
+        // TODO add your handling code here:
+        equipo.setNombre(jtfNombre.getText());
+        equipo.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        if(jrbActivo.isSelected()){
+         equipo.setEstado(1);
+        }
+        else{
+         equipo.setEstado(0);
+        }
+        if(equiData.modificarEquipo(equipo)){
+         JOptionPane.showMessageDialog(this, "Equipo modificado exitosamente");
+        }
+        else{
+         JOptionPane.showMessageDialog(this, "No se pudo modificar el equipo");
+        }
+    }//GEN-LAST:event_jbModificarEquipoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -281,9 +365,11 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbModificarEquipo;
     private javax.swing.JComboBox<Proyecto> jcbProyectos;
     private com.toedter.calendar.JDateChooser jdcFechaCreacion;
     private javax.swing.JRadioButton jrbActivo;

@@ -32,7 +32,7 @@ public class ProyectoData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                proyecto.setIdProyecto(rs.getInt("idProyecto"));
+                //proyecto.setIdProyecto(rs.getInt("idProyecto"));
                 JOptionPane.showMessageDialog(null, "Proyecto añadido con exito.");
             } 
             ps.close();
@@ -143,6 +143,7 @@ public class ProyectoData {
             ps.setString(3, proyecto.getDescripcion());
             ps.setDate(4, Date.valueOf(proyecto.getFechaInicio()));
             ps.setBoolean(5, proyecto.getEstado());
+            ps.setInt(6, proyecto.getIdProyecto());
             
             int exito = ps.executeUpdate();
             

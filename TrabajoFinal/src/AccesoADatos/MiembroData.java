@@ -101,7 +101,6 @@ public class MiembroData {
   }
   
   public boolean modificarMiembro(Miembro miembro) {
-        //"UPDATE `miembro` SET `idMiembro`= ?, `dni`=?,`apellido`=? ,`nombre`=? ,`estado`=? WHERE idMiembro=?;";
         String sql = "UPDATE `miembro` SET `dni`=?,`apellido`=? ,`nombre`=? ,`estado`=? WHERE idMiembro=?;";
         PreparedStatement ps = null;
         int exito;
