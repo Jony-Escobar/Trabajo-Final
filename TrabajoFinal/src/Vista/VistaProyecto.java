@@ -2,7 +2,6 @@ package Vista;
 
 import AccesoADatos.ProyectoData;
 import Modelo.Proyecto;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
@@ -220,13 +219,10 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radioButtonModificarActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
-        
         textFieldNombre.setText("");
         textFieldDescripcion.setText("");
         radioButtonEstado.setSelected(false);
-        jdcFechaCreacion.setCalendar(null);
-        //SETEAR FECHA
-        
+        jdcFechaCreacion.setCalendar(null);        
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
@@ -263,7 +259,10 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         ProyectoData pd = new ProyectoData();
         
         try {
-            
+            textFieldNombre.setEnabled(false);
+            jdcFechaCreacion.setEnabled(false);
+            textFieldDescripcion.setEnabled(false);
+            radioButtonEstado.setEnabled(false);
             if(textFieldID.getText().equals("")){
                 textFieldID.requestFocus();
                 throw new Exception("Por favor, ingrese un ID.");

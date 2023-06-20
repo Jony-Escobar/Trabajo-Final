@@ -30,7 +30,7 @@ public void guardarTarea(Tarea tarea){
             ps.setDate(3, Date.valueOf(tarea.getFechaCreacion()));//localDate a Date
             ps.setDate(4,  Date.valueOf(tarea.getFechaCierre()));
             ps.setInt(5, tarea.getEstado());
-            ps.setInt(6, tarea.getIdMiembroEq());
+            ps.setInt(6, tarea.getMiembroEq().getIdMiembroEq());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

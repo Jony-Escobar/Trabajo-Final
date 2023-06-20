@@ -29,8 +29,8 @@ public class EquipoMiembrosData {
          
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(equipomiembros.getFechaIncorporacion()));
-            ps.setInt(2, equipomiembros.getIdEquipo());
-            ps.setInt(3, equipomiembros.getIdMiembro());
+            ps.setInt(2, equipomiembros.getEquipo().getIdEquipo());
+            ps.setInt(3, equipomiembros.getMiembro().getIdMiembro());
             ps.setString(4, equipomiembros.getRol());
 
             ps.executeUpdate();

@@ -219,7 +219,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         proyecto= (Proyecto) jcbProyectos.getSelectedItem();
 //        if(jcbProyectos.getSelectedItem()!=null){
 //        validar++;}
-        equipo.setIdProyecto(proyecto.getIdProyecto());
+        equipo.setProyecto(proyecto);
         equipo.setNombre(jtfNombre.getText());
 //        if(!jtfNombre.getText().isEmpty()){
 //        validar++;}
