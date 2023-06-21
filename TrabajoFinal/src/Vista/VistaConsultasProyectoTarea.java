@@ -233,17 +233,18 @@ public class VistaConsultasProyectoTarea extends javax.swing.JInternalFrame {
         comboBoxProyectos.removeAllItems();
         
         for(Proyecto p: proyectos){
-            comboBoxProyectos.addItem(p.toString());
-            /*if(p.getEstado() == estado){
+            //comboBoxProyectos.addItem(p.toString());
+            if(p.getEstado() == estado){
                 
                 comboBoxProyectos.addItem(p.toString());
-                JOptionPane.showMessageDialog(this, p.getNombre() + ", " + p.getEstado());
+//                JOptionPane.showMessageDialog(this, p.getNombre() + ", " + p.getEstado());
                 
-            }else{
-                
-                JOptionPane.showMessageDialog(this, p.getNombre() + ", " + p.getEstado());
-                
-            }*/
+            }
+//            else{
+//                
+//                JOptionPane.showMessageDialog(this, p.getNombre() + ", " + p.getEstado());
+//                
+//            }
             
         }
 

@@ -76,7 +76,7 @@ public class ProyectoData {
 
         List<Proyecto> proyectos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM proyecto WHERE estado = 1 ";
+            String sql = "SELECT * FROM proyecto";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
