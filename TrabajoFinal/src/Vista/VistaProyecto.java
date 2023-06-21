@@ -217,12 +217,14 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         textFieldDescripcion.setEnabled(true);
         radioButtonEstado.setEnabled(true);
         buttonCrear.setEnabled(true);
+        limpiar();
     }//GEN-LAST:event_radioButtonCrearActionPerformed
 
     private void radioButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonModificarActionPerformed
         desactivar();
         textFieldID.setEnabled(true);
         btnBuscar.setEnabled(true);
+        limpiar();
     }//GEN-LAST:event_radioButtonModificarActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
@@ -240,6 +242,12 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                 textFieldNombre.requestFocus();
                 throw new Exception("Por favor, ingrese un nombre al proyecto.");
             }       
+            
+            if(){
+                textFieldNombre.requestFocus();
+                throw new Exception("Por favor, ingrese un nombre al proyecto.");
+            }      
+            
             pr.setNombre(textFieldNombre.getText());
             pr.setDescripcion(textFieldDescripcion.getText());
             pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());//SETEAR FECHA
@@ -266,6 +274,16 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
             if(textFieldID.getText().equals("")){
                 textFieldID.requestFocus();
                 throw new Exception("Por favor, ingrese un ID.");
+            }
+            
+            if(jdcFechaCreacion.toString().isEmpty()){
+                jdcFechaCreacion.requestFocus();
+                throw new Exception("Por favor, ingrese una fecha.");
+            }
+            
+            if(textFieldDescripcion.getText().equals("")){
+                textFieldDescripcion.requestFocus();
+                throw new Exception("Por favor, ingrese una descripción.");
             }
             
             if(!textFieldNombre.getText().equals("")){
