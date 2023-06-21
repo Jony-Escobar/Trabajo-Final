@@ -238,15 +238,20 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         
         try {
             
-            if(textFieldNombre.getText().equals("")){
-                textFieldNombre.requestFocus();
-                throw new Exception("Por favor, ingrese un nombre al proyecto.");
-            }       
+            if(textFieldID.getText().equals("")){
+                textFieldID.requestFocus();
+                throw new Exception("Por favor, ingrese un ID.");
+            }
             
-            if(){
-                textFieldNombre.requestFocus();
-                throw new Exception("Por favor, ingrese un nombre al proyecto.");
-            }      
+            if(jdcFechaCreacion.toString().isEmpty()){
+                jdcFechaCreacion.requestFocus();
+                throw new Exception("Por favor, ingrese una fecha.");
+            }
+            
+            if(textFieldDescripcion.getText().equals("")){
+                textFieldDescripcion.requestFocus();
+                throw new Exception("Por favor, ingrese una descripción.");
+            } 
             
             pr.setNombre(textFieldNombre.getText());
             pr.setDescripcion(textFieldDescripcion.getText());
@@ -286,14 +291,12 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                 throw new Exception("Por favor, ingrese una descripción.");
             }
             
-            if(!textFieldNombre.getText().equals("")){
-                pr.setIdProyecto(Integer.parseInt(textFieldID.getText()));
-                pr.setNombre(textFieldNombre.getText());
-                pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                pr.setDescripcion(textFieldDescripcion.getText());
-                pr.setEstado(radioButtonEstado.isSelected());
-                pd.modificarProyecto(pr);
-            }
+            pr.setIdProyecto(Integer.parseInt(textFieldID.getText()));
+            pr.setNombre(textFieldNombre.getText());
+            pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            pr.setDescripcion(textFieldDescripcion.getText());
+            pr.setEstado(radioButtonEstado.isSelected());
+            pd.modificarProyecto(pr);
             
         } catch (Exception e) {
             
