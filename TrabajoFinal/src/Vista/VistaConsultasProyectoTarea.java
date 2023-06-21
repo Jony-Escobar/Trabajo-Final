@@ -1,12 +1,13 @@
 package Vista;
 
 //Consultar proyectos y tareas: Los usuarios podrán ver la lista de proyectos y sus respectivas tareas, así como filtrar las
-//tareas por estado y miembro del equipo.
+
 import AccesoADatos.ProyectoData;
 import Modelo.Proyecto;
 import java.util.List;
+import javax.swing.JOptionPane;
 
-
+//tareas por estado y miembro del equipo.
 
 public class VistaConsultasProyectoTarea extends javax.swing.JInternalFrame {
 
