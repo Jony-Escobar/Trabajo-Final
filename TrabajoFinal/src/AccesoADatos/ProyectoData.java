@@ -84,9 +84,9 @@ public class ProyectoData {
 
                 proy.setIdProyecto(rs.getInt("idProyecto"));
                 proy.setNombre(rs.getString("nombre"));
-                //proy.setDescripcion(rs.getString("descripcion"));
-                //proy.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
-                //proy.setEstado(rs.getInt("estado"));
+                proy.setDescripcion(rs.getString("descripcion"));
+                proy.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                proy.setEstado(rs.getBoolean("estado"));
                 proyectos.add(proy);
             }
             ps.close();
