@@ -38,7 +38,7 @@ public class EquipoMiembrosData {
             
             if (rs.next()) {
                 
-                //equipomiembros.setIdMiembroEq(rs.getInt("idMiembroEq"));
+                equipomiembros.setIdMiembroEq(rs.getInt("idMiembroEq"));
                 JOptionPane.showMessageDialog(null, "Miembro añadido al equipo con exito.");
                 
             } 

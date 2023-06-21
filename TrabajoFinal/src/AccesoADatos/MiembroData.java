@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Modelo.Proyecto;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MiembroData {
     
@@ -72,40 +70,6 @@ public class MiembroData {
         return miembro;
                 
   }
-  
-  //Listar todos los miembros
-  public List<Miembro> recuperarMiembros(){
-   //String sql= "SELECT * FROM miembro WHERE idMiembro= 1"; //recupera los miembros activos
-   //PreparedStatement ps= null;
-   Miembro miembro= null;
-   List<Miembro> lista = new ArrayList<>();
-   try {
-            String sql= "SELECT * FROM miembro WHERE estado= 1"; //recupera los miembros activos
-            PreparedStatement ps = con.prepareStatement(sql);
-            //ps.setInt(1,idMiembro);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                miembro=new Miembro();
-                miembro.setIdMiembro(rs.getInt("idMiembro"));
-                miembro.setDni(rs.getInt("dni"));
-                miembro.setApellido(rs.getString("apellido"));
-                miembro.setNombre(rs.getString("nombre"));
-                miembro.setEstado(rs.getInt("estado"));
-                lista.add(miembro);
-                } 
-//            else {
-//                JOptionPane.showMessageDialog(null, "No existe ese miembro");
-//            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Miembro "+ex.getMessage());
-        }
-
-        return lista;
-                
-  }
-  
   
   public Miembro buscarMiembroDNI(int dni){
    String sql= "SELECT * FROM miembro WHERE dni= ?";
