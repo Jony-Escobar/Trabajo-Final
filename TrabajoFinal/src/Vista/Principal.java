@@ -167,6 +167,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuItemAsignarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAsignarTareaActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaTarea vt= new VistaTarea();
+        vt.setVisible(true);
+        escritorio.add(vt);
+        escritorio.moveToFront(vt);
     }//GEN-LAST:event_menuItemAsignarTareaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

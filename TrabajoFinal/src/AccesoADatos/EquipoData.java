@@ -34,7 +34,7 @@ public void guardarEquipo(Equipo equipo){
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                equipo.setIdEquipo(rs.getInt("idEquipo"));
+                //equipo.setIdEquipo(rs.getInt("idEquipo"));
                 JOptionPane.showMessageDialog(null, "Equipo añadido con exito.");
             } 
             ps.close();
