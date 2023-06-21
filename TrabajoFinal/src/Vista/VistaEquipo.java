@@ -240,8 +240,20 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
  
             Equipo equipo= new Equipo();
  
-            if(verificar()){
-                throw new Exception("Por favor, complete todos los campos.");
+            if(jcbProyectos.getSelectedItem() == null){            
+                throw new Exception("Por favor, seleccione un proyecto"); 
+            }
+            
+            if(jdcFechaCreacion.toString().isEmpty()){
+                throw new Exception("Por favor, ingrese una fecha.");
+            }
+            
+            if(jtfNombre.getText().equals("")){
+                throw new Exception("Por favor, Complete el campo nombre");
+            }
+            
+            if(!(jrbActivo.isSelected() || jrbInactivo.isSelected())){
+                throw new Exception("Por favor, Seleccione un estado");
             }
             
             equipo.setProyecto((Proyecto) jcbProyectos.getSelectedItem());
@@ -329,7 +341,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     private void jbModificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarEquipoActionPerformed
 
         try {
-            //JOptionPane.showMessageDialog(this, jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString().equals(""));
+            
             if(jcbEquipos.getSelectedItem() == null){            
                 throw new Exception("Por favor, seleccione un equipo"); 
             }
@@ -338,8 +350,8 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
                 throw new Exception("Por favor, Complete el campo nombre");
             }
             
-            if(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString().equals("")){
-                throw new Exception("Por favor, Complete el campo fecha de creación");
+            if(jdcFechaCreacion.toString().isEmpty()){
+                throw new Exception("Por favor, ingrese una fecha.");
             }
             
             if(!(jrbActivo.isSelected() || jrbInactivo.isSelected())){
@@ -398,15 +410,6 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
          
         }
     }
-    
-    public boolean verificar(){
-    if((jrbActivo.isSelected() || jrbInactivo.isSelected()) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty())){
-        
-        return true;
-    }
-    else{
-        return false;
-    }}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup activoInactivo;
