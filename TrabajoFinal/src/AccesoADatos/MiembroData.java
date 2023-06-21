@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Modelo.Proyecto;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiembroData {
     
@@ -99,6 +101,39 @@ public class MiembroData {
         return miembro;
                 
   }
+  
+  //Recuperar Miembros
+  public List<Miembro> recuperarMiembros(){
+   String sql= "SELECT * FROM miembro";
+   PreparedStatement ps= null;
+   Miembro miembro= null;
+   List<Miembro> lista= new ArrayList();
+   try {
+            ps = con.prepareStatement(sql);
+            //ps.setInt(1,dni);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                miembro=new Miembro();
+                miembro.setIdMiembro(rs.getInt("idMiembro"));
+                miembro.setDni(rs.getInt("dni"));
+                miembro.setApellido(rs.getString("apellido"));
+                miembro.setNombre(rs.getString("nombre"));
+                miembro.setEstado(rs.getInt("estado"));
+                lista.add(miembro);
+                } 
+//            else {
+//                JOptionPane.showMessageDialog(null, "No existe ese miembro");
+//            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Miembro "+ex.getMessage());
+        }
+
+        return lista;
+                
+  }
+  
   
   public boolean modificarMiembro(Miembro miembro) {
         String sql = "UPDATE `miembro` SET `dni`=?,`apellido`=? ,`nombre`=? ,`estado`=? WHERE idMiembro=?;";
