@@ -23,8 +23,8 @@ public class EquipoData {
     
 public void guardarEquipo(Equipo equipo){
     
-   
         try {
+            
             String sql = "INSERT INTO equipo (idProyecto, nombre, fechaCreacion, estado) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, equipo.getProyecto().getIdProyecto());
@@ -34,7 +34,7 @@ public void guardarEquipo(Equipo equipo){
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                //equipo.setIdEquipo(rs.getInt("idEquipo"));
+                equipo.setIdEquipo(rs.getInt("idEquipo"));
                 JOptionPane.showMessageDialog(null, "Equipo añadido con exito.");
             } 
             ps.close();
@@ -75,8 +75,6 @@ public boolean modificarEquipo(Equipo equipo){
         return modificado;
         
     }
- 
-
 
 public Equipo buscarEquipo(int idEquipo){
   

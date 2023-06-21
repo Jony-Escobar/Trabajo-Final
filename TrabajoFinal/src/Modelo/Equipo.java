@@ -72,7 +72,7 @@ public class Equipo {
 
     @Override
     public String toString() {
-        return "Equipo{" + "idEquipo=" + idEquipo + ", proyecto=" + proyecto + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", estado=" + estado + '}';
+        return idEquipo + "  " + nombre;
     }
 
 }

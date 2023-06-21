@@ -14,44 +14,31 @@ import javax.swing.table.DefaultTableModel;
 public class VistaEquipo extends javax.swing.JInternalFrame {
 
      DefaultTableModel modelo;
-     ProyectoData proyData= new ProyectoData();
      LocalDate localDate;
-     Equipo equipo= new Equipo();
+     ProyectoData proyData= new ProyectoData();
      EquipoData equiData= new EquipoData();
-     
 
     public VistaEquipo() {
         initComponents();
-        jrbAlta.setSelected(false);
-        jrbModificar.setSelected(false);
-        //jbGuardar.setEnabled(false);
-        
-        
-        llenarCombo();
+        jcbProyectos.setEnabled(false);
+        jcbEquipos.setEnabled(false);
+        jtfNombre.setEnabled(false);
+        jdcFechaCreacion.setEnabled(false);
+        jrbActivo.setEnabled(false);
+        jrbInactivo.setEnabled(false);
+        jbBuscar.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        jbLimpiar.setEnabled(false);
+        jbModificarEquipo.setEnabled(false);
     }
     
-    public void llenarCombo(){
-  List<Proyecto> proyectos= proyData.listarProyectos();
-        for(Proyecto proy: proyectos){
-         jcbProyectos.addItem(proy);
-  }
-    }
-    
-    public boolean verificar(){
-    if((jrbAlta.isSelected()==true) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty()) ){
-        
-        return true;
-    }
-    else{
-        return false;
-    }}
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        altaModificar = new javax.swing.ButtonGroup();
+        activoInactivo = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jcbProyectos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -69,19 +56,13 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jbModificarEquipo = new javax.swing.JButton();
-
-        jButton1.setText("jButton1");
+        jLabel6 = new javax.swing.JLabel();
+        jcbEquipos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EQUIPO");
-
-        jcbProyectos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbProyectosActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Proyecto");
 
@@ -110,6 +91,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             }
         });
 
+        altaModificar.add(jrbModificar);
         jrbModificar.setText("Modificar");
         jrbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +99,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             }
         });
 
+        altaModificar.add(jrbAlta);
         jrbAlta.setText("Dar de Alta");
         jrbAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,13 +107,15 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             }
         });
 
+        activoInactivo.add(jrbActivo);
         jrbActivo.setText("Activo");
 
+        activoInactivo.add(jrbInactivo);
         jrbInactivo.setText("Inactivo");
 
         jLabel5.setText("Estado");
 
-        jbBuscar.setText("Buscar Equipo");
+        jbBuscar.setText("Buscar Equipo/s");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -144,6 +129,8 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Equipos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,6 +138,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,16 +173,19 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jcbProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,11 +193,15 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
                     .addComponent(jrbModificar)
                     .addComponent(jbBuscar)
                     .addComponent(jbModificarEquipo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jcbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,91 +225,85 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProyectosActionPerformed
-          
-    }//GEN-LAST:event_jcbProyectosActionPerformed
-
+    
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // TODO add your handling code here:
-        int validar=0;
-//        if(jrbAlta.isSelected()==true){
-//        validar++;
-//        }
-        EquipoData equiData= new EquipoData();
-        Equipo equipo= new Equipo();
-        ProyectoData proyData= new ProyectoData();
-        Proyecto proyecto= new Proyecto();
-        proyecto= (Proyecto) jcbProyectos.getSelectedItem();
-//        if(jcbProyectos.getSelectedItem()!=null){
-//        validar++;}
-        equipo.setProyecto(proyecto);
-        equipo.setNombre(jtfNombre.getText());
-//        if(!jtfNombre.getText().isEmpty()){
-//        validar++;}
-        localDate = jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        if(!localDate.toString().isEmpty()){
-//        validar++;
-//        }
-        equipo.setFechaCreacion(localDate);
-        if(jrbActivo.isSelected()){
-         equipo.setEstado(1);
-        }
-        else{
-         equipo.setEstado(0);
-        }
-        if(verificar()){
-        equiData.guardarEquipo(equipo);}
-        else{
-         JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
-        }
         
+        try {
+ 
+            Equipo equipo= new Equipo();
+ 
+            if(verificar()){
+                throw new Exception("Por favor, complete todos los campos.");
+            }
+            
+            equipo.setProyecto((Proyecto) jcbProyectos.getSelectedItem());
+            equipo.setNombre(jtfNombre.getText());
+            equipo.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+              
+            if(jrbActivo.isSelected()){
+                equipo.setEstado(1);
+            }
+            else{
+                equipo.setEstado(0);
+            }
+                
+            equiData.guardarEquipo(equipo);
+  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+            //JOptionPane.showMessageDialog(this, "catch");
+        }
+       
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jrbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbAltaActionPerformed
-        // TODO add your handling code here:
-        jrbModificar.setSelected(false);
-        jrbActivo.setSelected(true);
-        jrbInactivo.setEnabled(false);
+        jcbProyectos.setEnabled(true);
+        jbBuscar.setEnabled(false);
+        jbModificarEquipo.setEnabled(false);
+        jcbEquipos.setEnabled(false);
+        jtfNombre.setEnabled(true);
+        jdcFechaCreacion.setEnabled(true);
+        jrbActivo.setEnabled(true);
+        jrbInactivo.setEnabled(true);
+        jbGuardar.setEnabled(true);
+        jbLimpiar.setEnabled(true);
+        limpiar();
+        llenarCombo();
     }//GEN-LAST:event_jrbAltaActionPerformed
 
     private void jrbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbModificarActionPerformed
-        // TODO add your handling code here:
-        jrbAlta.setSelected(false);
-        jrbInactivo.setEnabled(false);
-        jrbInactivo.setSelected(false);
-        jrbActivo.setSelected(false);
+        jcbProyectos.setEnabled(true);
+        jbLimpiar.setEnabled(true);
+        jbBuscar.setEnabled(true);
         jtfNombre.setEnabled(false);
         jdcFechaCreacion.setEnabled(false);
         jrbActivo.setEnabled(false);
         jrbInactivo.setEnabled(false);
         jbModificarEquipo.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        limpiar();
+        llenarCombo();
     }//GEN-LAST:event_jrbModificarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
-        jrbAlta.setSelected(false);
-        jrbModificar.setSelected(false);
-        jtfNombre.setText(" ");
-        jcbProyectos.setSelectedIndex(-1);
-        jdcFechaCreacion.setCalendar (null);
-        jrbActivo.setSelected(false);
-        jrbInactivo.setSelected(false);
+        limpiar();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        
+        /*VIEJO
         //Activo los campos del equipo para su modificación
         jtfNombre.setEnabled(true);
         jdcFechaCreacion.setEnabled(true);
         jrbActivo.setEnabled(true);
         jrbInactivo.setEnabled(true);
         jbGuardar.setEnabled(false);
+        //jcbEquipos.setEnabled(true);
         
+        Equipo equipo= new Equipo();
         
         Proyecto proyecto= new Proyecto();
         proyecto= (Proyecto) jcbProyectos.getSelectedItem();
@@ -335,12 +324,34 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         }
         else{
          jrbInactivo.setSelected(true);
-        }
+        }*/
         
+        jcbEquipos.setEnabled(true);
+        jtfNombre.setEnabled(true);
+        jdcFechaCreacion.setEnabled(true);
+        jrbActivo.setEnabled(true);
+        jrbInactivo.setEnabled(true);
+        jbModificarEquipo.setEnabled(true);
+        
+        List<Equipo> equipos= equiData.recuperarEquipos();
+        
+        Proyecto p = (Proyecto) jcbProyectos.getSelectedItem();
+        jcbEquipos.removeAllItems();
+        for(Equipo e: equipos){
+            
+            if(e.getProyecto().getIdProyecto() == p.getIdProyecto()){
+                
+                jcbEquipos.addItem(e.toString());
+                
+            }
+         
+        }
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbModificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarEquipoActionPerformed
-        // TODO add your handling code here:
+        Equipo equipo= new Equipo();
+        
         equipo.setNombre(jtfNombre.getText());
         equipo.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         if(jrbActivo.isSelected()){
@@ -357,19 +368,50 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbModificarEquipoActionPerformed
 
+    private void limpiar(){
+        jtfNombre.setText("");
+        jcbProyectos.removeAllItems();
+        jdcFechaCreacion.setCalendar (null);
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(false);
+    }
+    
+    public void llenarCombo(){
+        List<Proyecto> proyectos= proyData.listarProyectos();
+        for(Proyecto p: proyectos){
+            
+            if(p.getEstado()){
+                jcbProyectos.addItem(p);
+            }
+         
+        }
+    }
+    
+    public boolean verificar(){
+    if((jrbActivo.isSelected() || jrbInactivo.isSelected()) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty()) ){
+        
+        return true;
+    }
+    else{
+        return false;
+    }}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup activoInactivo;
+    private javax.swing.ButtonGroup altaModificar;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificarEquipo;
+    private javax.swing.JComboBox<String> jcbEquipos;
     private javax.swing.JComboBox<Proyecto> jcbProyectos;
     private com.toedter.calendar.JDateChooser jdcFechaCreacion;
     private javax.swing.JRadioButton jrbActivo;
