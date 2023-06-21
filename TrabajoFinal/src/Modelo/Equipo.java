@@ -75,4 +75,6 @@ public class Equipo {
         return idEquipo + "  " + nombre;
     }
 
+    
+
 }

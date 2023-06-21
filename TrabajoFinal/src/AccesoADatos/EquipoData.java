@@ -181,7 +181,7 @@ public void activarEquipo(int idEquipo) {
 public List<Equipo> recuperarEquipos(){
   List<Equipo> equipos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM equipo WHERE estado = 1 ";
+            String sql = "SELECT * FROM equipo";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

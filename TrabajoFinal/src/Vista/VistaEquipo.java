@@ -64,6 +64,8 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EQUIPO");
 
+        jcbProyectos.setToolTipText("");
+
         jLabel2.setText("Proyecto");
 
         jLabel3.setText("Nombre");
@@ -130,6 +132,12 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         });
 
         jLabel6.setText("Equipos");
+
+        jcbEquipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEquiposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,7 +259,6 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
   
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
-            //JOptionPane.showMessageDialog(this, "catch");
         }
        
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -272,6 +279,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jbGuardar.setEnabled(true);
         jbLimpiar.setEnabled(true);
         limpiar();
+        jrbActivo.setSelected(true);
         llenarCombo();
     }//GEN-LAST:event_jrbAltaActionPerformed
 
@@ -294,38 +302,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        /*VIEJO
-        //Activo los campos del equipo para su modificación
-        jtfNombre.setEnabled(true);
-        jdcFechaCreacion.setEnabled(true);
-        jrbActivo.setEnabled(true);
-        jrbInactivo.setEnabled(true);
-        jbGuardar.setEnabled(false);
-        //jcbEquipos.setEnabled(true);
-        
-        Equipo equipo= new Equipo();
-        
-        Proyecto proyecto= new Proyecto();
-        proyecto= (Proyecto) jcbProyectos.getSelectedItem();
-        //Equipo equipo= new Equipo();
-        //EquipoData equiData= new EquipoData();
-        equipo= equiData.buscarEquipoProyecto(proyecto.getIdProyecto());
-        if(equipo!=null){
-         jbModificarEquipo.setEnabled(true);
-        }
-        jtfNombre.setText(equipo.getNombre());
-        LocalDate local = equipo.getFechaCreacion();
-        Instant instant = local.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-        Date date = Date.from(instant);
-        //jdcFechaCreacion.setDate(java.sql.Date.valueOf(equipo.getFechaCreacion()));
-        jdcFechaCreacion.setDate(date);
-        if(equipo.getEstado()==1){
-         jrbActivo.setSelected(true);
-        }
-        else{
-         jrbInactivo.setSelected(true);
-        }*/
-        
+      
         jcbEquipos.setEnabled(true);
         jtfNombre.setEnabled(true);
         jdcFechaCreacion.setEnabled(true);
@@ -341,8 +318,8 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             
             if(e.getProyecto().getIdProyecto() == p.getIdProyecto()){
                 
-                jcbEquipos.addItem(e.toString());
-                
+                jcbEquipos.addItem(e);
+
             }
          
         }
@@ -350,23 +327,58 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbModificarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarEquipoActionPerformed
-        Equipo equipo= new Equipo();
+
+        try {
+            //JOptionPane.showMessageDialog(this, jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString().equals(""));
+            if(jcbEquipos.getSelectedItem() == null){            
+                throw new Exception("Por favor, seleccione un equipo"); 
+            }
+            
+            if(jtfNombre.getText().equals("")){
+                throw new Exception("Por favor, Complete el campo nombre");
+            }
+            
+            if(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString().equals("")){
+                throw new Exception("Por favor, Complete el campo fecha de creación");
+            }
+            
+            if(!(jrbActivo.isSelected() || jrbInactivo.isSelected())){
+                throw new Exception("Por favor, Seleccione un estado");
+            }
+            
+            Equipo equipo= (Equipo) jcbEquipos.getSelectedItem();
+
+                equipo.setNombre(jtfNombre.getText());
+                equipo.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                if(jrbActivo.isSelected()){
+                 equipo.setEstado(1);
+                }
+                else{
+                 equipo.setEstado(0);
+                }
+                if(equiData.modificarEquipo(equipo)){
+                 JOptionPane.showMessageDialog(this, "Equipo modificado exitosamente");
+                }
+                else{
+                 JOptionPane.showMessageDialog(this, "No se pudo modificar el equipo");
+                }
+                limpiar();
+  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
         
-        equipo.setNombre(jtfNombre.getText());
-        equipo.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        if(jrbActivo.isSelected()){
-         equipo.setEstado(1);
-        }
-        else{
-         equipo.setEstado(0);
-        }
-        if(equiData.modificarEquipo(equipo)){
-         JOptionPane.showMessageDialog(this, "Equipo modificado exitosamente");
-        }
-        else{
-         JOptionPane.showMessageDialog(this, "No se pudo modificar el equipo");
-        }
     }//GEN-LAST:event_jbModificarEquipoActionPerformed
+
+    private void jcbEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEquiposActionPerformed
+        Equipo e = (Equipo) jcbEquipos.getSelectedItem();
+        jtfNombre.setText(e.getNombre());
+        if(e.getEstado() == 1){
+            jrbActivo.setSelected(true);
+        }else{
+            jrbInactivo.setSelected(true);
+        }
+    }//GEN-LAST:event_jcbEquiposActionPerformed
 
     private void limpiar(){
         jtfNombre.setText("");
@@ -388,7 +400,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     }
     
     public boolean verificar(){
-    if((jrbActivo.isSelected() || jrbInactivo.isSelected()) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty()) ){
+    if((jrbActivo.isSelected() || jrbInactivo.isSelected()) && (jcbProyectos.getSelectedItem()!=null) && (!jtfNombre.getText().isEmpty()) && (!localDate.toString().isEmpty())){
         
         return true;
     }
@@ -411,7 +423,7 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificarEquipo;
-    private javax.swing.JComboBox<String> jcbEquipos;
+    private javax.swing.JComboBox<Equipo> jcbEquipos;
     private javax.swing.JComboBox<Proyecto> jcbProyectos;
     private com.toedter.calendar.JDateChooser jdcFechaCreacion;
     private javax.swing.JRadioButton jrbActivo;
