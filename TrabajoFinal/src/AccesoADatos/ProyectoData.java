@@ -2,7 +2,6 @@ package AccesoADatos;
 
 
 import java.sql.Connection;
-import Modelo.Proyecto;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +28,7 @@ public class ProyectoData {
             ps.setString(1, proyecto.getNombre());
             ps.setString(2, proyecto.getDescripcion());
             ps.setDate(3, Date.valueOf(proyecto.getFechaInicio()));//localDate a Date
-            ps.setInt(4, proyecto.getEstado());
+            ps.setBoolean(4, proyecto.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -58,7 +57,7 @@ public class ProyectoData {
                 proyecto.setNombre(rs.getString("nombre"));
                 proyecto.setDescripcion(rs.getString("descripcion"));
                 proyecto.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
-                proyecto.setEstado(rs.getInt("estado"));
+                proyecto.setEstado(rs.getBoolean("estado"));
                 ps.close();
                 } 
             else {
@@ -143,12 +142,8 @@ public class ProyectoData {
             ps.setString(2, proyecto.getNombre());
             ps.setString(3, proyecto.getDescripcion());
             ps.setDate(4, Date.valueOf(proyecto.getFechaInicio()));
-<<<<<<< HEAD
             ps.setBoolean(5, proyecto.getEstado());
             ps.setInt(6, proyecto.getIdProyecto());
-=======
-            ps.setInt(5, proyecto.getEstado());
->>>>>>> parent of 633bb72 (Actualizando vistaProyecto)
             
             int exito = ps.executeUpdate();
             

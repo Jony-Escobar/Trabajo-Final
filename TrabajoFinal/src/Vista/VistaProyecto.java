@@ -2,6 +2,7 @@ package Vista;
 
 import AccesoADatos.ProyectoData;
 import Modelo.Proyecto;
+import java.sql.Date;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 
@@ -10,9 +11,8 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
     public VistaProyecto() {
         initComponents();
         
-        //Desactivamos botones
-        buttonCrear.setEnabled(false);
-        buttonModificar.setEnabled(false);
+        //Desactivamos todo
+        desactivar();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +37,7 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         textFieldID = new javax.swing.JTextField();
         jdcFechaCreacion = new com.toedter.calendar.JDateChooser();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,6 +98,13 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("ID PROYECTO:");
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +151,10 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar))
                             .addComponent(jdcFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioButtonEstado))))
@@ -165,8 +176,9 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                                 .addGap(44, 44, 44))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6)))
-                        .addGap(10, 10, 10)
+                                .addComponent(jLabel6)
+                                .addComponent(btnBuscar)))
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -195,43 +207,28 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-        
-        dispose();
-        
+        dispose();        
     }//GEN-LAST:event_buttonSalirActionPerformed
 
     private void radioButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCrearActionPerformed
-        
+        desactivar();
+        textFieldNombre.setEnabled(true);
+        jdcFechaCreacion.setEnabled(true);
+        textFieldDescripcion.setEnabled(true);
+        radioButtonEstado.setEnabled(true);
         buttonCrear.setEnabled(true);
-<<<<<<< HEAD
         limpiar();
-=======
-        buttonModificar.setEnabled(false);
-        radioButtonEstado.setEnabled(false);
-        textFieldID.setEnabled(false);
-        
->>>>>>> parent of 633bb72 (Actualizando vistaProyecto)
     }//GEN-LAST:event_radioButtonCrearActionPerformed
 
     private void radioButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonModificarActionPerformed
-        
-        buttonCrear.setEnabled(false);
-        buttonModificar.setEnabled(true);
-        radioButtonEstado.setEnabled(true);
+        desactivar();
         textFieldID.setEnabled(true);
-<<<<<<< HEAD
         btnBuscar.setEnabled(true);
         limpiar();
-=======
-        
->>>>>>> parent of 633bb72 (Actualizando vistaProyecto)
     }//GEN-LAST:event_radioButtonModificarActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
-        textFieldNombre.setText("");
-        textFieldDescripcion.setText("");
-        radioButtonEstado.setSelected(false);
-        jdcFechaCreacion.setCalendar(null);        
+        limpiar();        
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
@@ -260,13 +257,12 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
             pr.setDescripcion(textFieldDescripcion.getText());
             pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());//SETEAR FECHA
             if(radioButtonEstado.isSelected()){
-                pr.setEstado(1);
+                pr.setEstado(true);
             }else{
-                pr.setEstado(0);
-            }
-            
+                pr.setEstado(false);
+            }            
             pd.guardarProyecto(pr);
-            
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -279,23 +275,15 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         ProyectoData pd = new ProyectoData();
         
         try {
-            textFieldNombre.setEnabled(false);
-            jdcFechaCreacion.setEnabled(false);
-            textFieldDescripcion.setEnabled(false);
-            radioButtonEstado.setEnabled(false);
+            
             if(textFieldID.getText().equals("")){
                 textFieldID.requestFocus();
                 throw new Exception("Por favor, ingrese un ID.");
             }
             
-<<<<<<< HEAD
             if(jdcFechaCreacion.toString().isEmpty()){
                 jdcFechaCreacion.requestFocus();
                 throw new Exception("Por favor, ingrese una fecha.");
-=======
-            if(!textFieldNombre.getText().equals("")){
-                //SETEAR SOLO CAMPOS INGRESADOS?
->>>>>>> parent of 633bb72 (Actualizando vistaProyecto)
             }
             
             if(textFieldDescripcion.getText().equals("")){
@@ -318,9 +306,45 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_buttonModificarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        ProyectoData pd = new ProyectoData();
+        Proyecto proyecto = pd.buscarProyecto(Integer.parseInt(textFieldID.getText()));
+        if (proyecto != null) {
+            desactivar();
+            textFieldNombre.setEnabled(true);
+            jdcFechaCreacion.setEnabled(true);
+            textFieldDescripcion.setEnabled(true);
+            radioButtonEstado.setEnabled(true);
+            buttonModificar.setEnabled(true);
+        }
+        textFieldNombre.setText(proyecto.getNombre());
+        jdcFechaCreacion.setDate(Date.from(proyecto.getFechaInicio().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        //Date.from(proyecto.getFechaInicio().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        textFieldDescripcion.setText(proyecto.getDescripcion());
+        radioButtonEstado.setSelected(proyecto.getEstado());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    
+    private void limpiar (){
+        textFieldID.setText("");
+        textFieldNombre.setText("");
+        textFieldDescripcion.setText("");
+        radioButtonEstado.setSelected(false);
+        jdcFechaCreacion.setCalendar(null);
+    }
+    private void desactivar (){
+        textFieldID.setEnabled(false);
+        textFieldNombre.setEnabled(false);
+        jdcFechaCreacion.setEnabled(false);
+        textFieldDescripcion.setEnabled(false);
+        radioButtonEstado.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        buttonCrear.setEnabled(false);
+        buttonModificar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGroupCrearProyecto;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton buttonCrear;
     private javax.swing.JButton buttonLimpiar;
     private javax.swing.JButton buttonModificar;
