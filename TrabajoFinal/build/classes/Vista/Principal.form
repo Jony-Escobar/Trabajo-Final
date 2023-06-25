@@ -43,7 +43,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemCrearProyecto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear proyecto"/>
+                <Property name="text" type="java.lang.String" value="Crear/Modificar Proyecto"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemCrearProyectoActionPerformed"/>
@@ -67,11 +67,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizarEstadoTarea">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Actualizar estado de tarea"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuItemRegistrarAvance">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Registrar avance"/>
               </Properties>
             </MenuItem>
           </SubComponents>

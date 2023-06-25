@@ -22,15 +22,14 @@ public class TareaData {
     
 public void guardarTarea(Tarea tarea){
     
-   String sql = "INSERT INTO tarea (id, nombre, fechaCreacion, fechaCierre, estado, idMiembroEq) VALUES (?, ?, ?, ?, ?,?)";
+   String sql = "INSERT INTO tarea (nombre, fechaCreacion, fechaCierre, estado, idMiembroEq) VALUES (?, ?, ?, ?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, tarea.getIdTarea());
-            ps.setString(2, tarea.getNombre());
-            ps.setDate(3, Date.valueOf(tarea.getFechaCreacion()));//localDate a Date
-            ps.setDate(4,  Date.valueOf(tarea.getFechaCierre()));
-            ps.setInt(5, tarea.getEstado());
-            ps.setInt(6, tarea.getMiembroEq().getIdMiembroEq());
+            ps.setString(1, tarea.getNombre());
+            ps.setDate(2, Date.valueOf(tarea.getFechaCreacion()));//localDate a Date
+            ps.setDate(3,  Date.valueOf(tarea.getFechaCierre()));
+            ps.setInt(4, tarea.getEstado());
+            ps.setInt(5, tarea.getMiembroEq().getIdMiembroEq());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

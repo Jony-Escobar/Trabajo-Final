@@ -236,13 +236,7 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         Proyecto pr = new Proyecto();
         ProyectoData pd = new ProyectoData();
         
-        try {
-            
-            if(textFieldID.getText().equals("")){
-                textFieldID.requestFocus();
-                throw new Exception("Por favor, ingrese un ID.");
-            }
-            
+        try {            
             if(jdcFechaCreacion.toString().isEmpty()){
                 jdcFechaCreacion.requestFocus();
                 throw new Exception("Por favor, ingrese una fecha.");

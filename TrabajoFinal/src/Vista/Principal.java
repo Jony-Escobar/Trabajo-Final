@@ -25,7 +25,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuItemAsignarTarea = new javax.swing.JMenuItem();
         menuItemActualizarEstadoTarea = new javax.swing.JMenuItem();
-        menuItemRegistrarAvance = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         menuItemProyectoTareas = new javax.swing.JMenuItem();
         menuItemInformacionDeEquipo = new javax.swing.JMenuItem();
@@ -61,7 +60,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.setText("Proyecto");
 
-        menuItemCrearProyecto.setText("Crear proyecto");
+        menuItemCrearProyecto.setText("Crear/Modificar Proyecto");
         menuItemCrearProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemCrearProyectoActionPerformed(evt);
@@ -83,9 +82,6 @@ public class Principal extends javax.swing.JFrame {
 
         menuItemActualizarEstadoTarea.setText("Actualizar estado de tarea");
         jMenu2.add(menuItemActualizarEstadoTarea);
-
-        menuItemRegistrarAvance.setText("Registrar avance");
-        jMenu2.add(menuItemRegistrarAvance);
 
         jMenuBar1.add(jMenu2);
 
@@ -183,7 +179,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        VistaTarea vt= new VistaTarea();
+        VistaAsignarTarea vt= new VistaAsignarTarea();
         vt.setVisible(true);
         escritorio.add(vt);
         escritorio.moveToFront(vt);
@@ -283,6 +279,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCrearProyecto;
     private javax.swing.JMenuItem menuItemInformacionDeEquipo;
     private javax.swing.JMenuItem menuItemProyectoTareas;
-    private javax.swing.JMenuItem menuItemRegistrarAvance;
     // End of variables declaration//GEN-END:variables
 }

@@ -134,12 +134,12 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
 
     private void jrbActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivosActionPerformed
         jcbEquipos.removeAllItems();
-        llenarCB(1);
+//        llenarCB(1);
     }//GEN-LAST:event_jrbActivosActionPerformed
 
     private void jrbInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivosActionPerformed
         jcbEquipos.removeAllItems();
-        llenarCB(0);
+//        llenarCB(0);
     }//GEN-LAST:event_jrbInactivosActionPerformed
 
     private void jcbEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEquiposActionPerformed
@@ -150,39 +150,39 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
 
     private void llenarTabla(){
     
-        DefaultTableModel modelo;
-        Miembro miembro= (Miembro) jcbMateria.getSelectedItem();
-        modelo = (DefaultTableModel) jtMiembros.getModel();
-        jtAlumnos.setModel(modelo);
-        List<Alumno> alumnos= insData.obtenerAlumnosXMateria(materia.getIdMateria());
-        for(Alumno alu: alumnos){
-          modelo.addRow(new Object[]{alu.getIdAlumno(), alu.getDni(),alu.getApellido(),alu.getNombre()});
-        }
+//        DefaultTableModel modelo;
+//        Miembro miembro= (Miembro) jcbMateria.getSelectedItem();
+//        modelo = (DefaultTableModel) jtMiembros.getModel();
+//        jtAlumnos.setModel(modelo);
+//        List<Alumno> alumnos= insData.obtenerAlumnosXMateria(materia.getIdMateria());
+//        for(Alumno alu: alumnos){
+//          modelo.addRow(new Object[]{alu.getIdAlumno(), alu.getDni(),alu.getApellido(),alu.getNombre()});
+//        }
     }
     
     private void borrarFilas(){
-     modelo = (DefaultTableModel) jtAlumnos.getModel();
-          jtAlumnos.setModel(modelo);
-        // System.out.println("Cantidad de filas: "+ modelo.getRowCount());
-      if(modelo.getRowCount()>0){
-       int filas= modelo.getRowCount()-1;
-       for(int i= filas; i>=0;i--){
-         modelo.removeRow(i);
-      }
-    
-    private void llenarCB(int estado){
-        
-        List<Equipo> equipos = ed.recuperarEquipos();
-        
-        for(Equipo e: equipos){
-            
-            if(e.getEstado() == estado){
-                
-                jcbEquipos.addItem(e);
-                
-            }
-            
-        }
+//     modelo = (DefaultTableModel) jtAlumnos.getModel();
+//          jtAlumnos.setModel(modelo);
+//        // System.out.println("Cantidad de filas: "+ modelo.getRowCount());
+//      if(modelo.getRowCount()>0){
+//       int filas= modelo.getRowCount()-1;
+//       for(int i= filas; i>=0;i--){
+//         modelo.removeRow(i);
+//      }
+//    
+//    private void llenarCB(int estado){
+//        
+//        List<Equipo> equipos = ed.recuperarEquipos();
+//        
+//        for(Equipo e: equipos){
+//            
+//            if(e.getEstado() == estado){
+//                
+//                jcbEquipos.addItem(e);
+//                
+//            }
+//            
+//        }
         
     }
 

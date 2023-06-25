@@ -65,6 +65,11 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
         jLabel1.setText("EQUIPO");
 
         jcbProyectos.setToolTipText("");
+        jcbProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProyectosActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Proyecto");
 
@@ -391,6 +396,10 @@ public class VistaEquipo extends javax.swing.JInternalFrame {
             jrbInactivo.setSelected(true);
         }
     }//GEN-LAST:event_jcbEquiposActionPerformed
+
+    private void jcbProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProyectosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProyectosActionPerformed
 
     private void limpiar(){
         jtfNombre.setText("");
