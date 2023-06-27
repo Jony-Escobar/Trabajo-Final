@@ -81,6 +81,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(menuItemAsignarTarea);
 
         menuItemActualizarEstadoTarea.setText("Actualizar estado de tarea");
+        menuItemActualizarEstadoTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarEstadoTareaActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuItemActualizarEstadoTarea);
 
         jMenuBar1.add(jMenu2);
@@ -176,7 +181,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemProyectoTareasActionPerformed
 
     private void menuItemAsignarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAsignarTareaActionPerformed
-        // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
         VistaAsignarTarea vt= new VistaAsignarTarea();
@@ -186,7 +190,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemAsignarTareaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
         VistaEquipo ve = new VistaEquipo();
@@ -223,6 +226,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(vme);
         escritorio.moveToFront(vme);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void menuItemActualizarEstadoTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoTareaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaActualizarTarea vat= new VistaActualizarTarea();
+        vat.setVisible(true);
+        escritorio.add(vat);
+        escritorio.moveToFront(vat);
+    }//GEN-LAST:event_menuItemActualizarEstadoTareaActionPerformed
 
 
     public static void main(String args[]) {

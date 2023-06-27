@@ -73,7 +73,7 @@ private EquiposMiembros miembroEq;
 
     @Override
     public String toString() {
-        return "Tarea{" + "idTarea=" + idTarea + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", fechaCierre=" + fechaCierre + ", estado=" + estado + ", miembroEq=" + miembroEq + '}';
+        return idTarea + "  " + nombre;
     }
 
 }
