@@ -252,7 +252,8 @@ public class EquipoMiembrosData {
                 //EM.setIdMiembro(rs.getInt("idMiembro"));
                 EquipoData ed = new EquipoData();
                 MiembroData md = new MiembroData();
-                EM.setEquipo(ed.buscarEquipo(rs.getInt("idMiembroEq")));
+                //Nico: decia idmiembroeq, lo cambie, por las dudas dejo nota
+                EM.setEquipo(ed.buscarEquipo(rs.getInt("idEquipo")));
                 EM.setMiembro(md.buscarMiembro(rs.getInt("idMiembro")));
                 EM.setRol(rs.getString("rol"));
                 equiposmiembros.add(EM);

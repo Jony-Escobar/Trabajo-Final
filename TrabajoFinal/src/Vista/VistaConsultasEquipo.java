@@ -1,7 +1,10 @@
 package Vista;
-
+/*Consultar información del equipo: Los usuarios podrán ver la lista de miembros del equipo y obtener información detallada
+de cada miembro, como su nombre y rol.*/
 import AccesoADatos.EquipoData;
+import AccesoADatos.EquipoMiembrosData;
 import Modelo.Equipo;
+import Modelo.EquiposMiembros;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,9 +12,11 @@ import javax.swing.table.DefaultTableModel;
 public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
 
     private EquipoData ed = new EquipoData();
+    private EquipoMiembrosData emd = new EquipoMiembrosData();
     
     public VistaConsultasEquipo() {
         initComponents();
+        jtfProyecto.setEditable(false);
     }
 
 
@@ -28,6 +33,10 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMiembros = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jbSalir = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jtfProyecto = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Consultar equipos y miembros");
@@ -58,19 +67,19 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
 
         jtMiembros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Apellido", "Nombre"
+                "DNI", "Apellido", "Nombre", "Rol", "Estado", "Fecha de incorporación"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,32 +91,63 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Miembros");
 
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Proyecto:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jrbActivos)
+                        .addGap(27, 27, 27)
+                        .addComponent(jrbInactivos)
+                        .addGap(169, 169, 169))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbSalir)
+                        .addGap(31, 31, 31))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jrbActivos)
-                        .addGap(18, 18, 18)
-                        .addComponent(jrbInactivos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(264, 264, 264)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(199, 199, 199)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfProyecto))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jcbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBuscar)))
+                        .addGap(0, 111, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,12 +161,19 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(56, 56, 56)
-                .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jbBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jtfProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,55 +181,87 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
 
     private void jrbActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivosActionPerformed
         jcbEquipos.removeAllItems();
-//        llenarCB(1);
+        borrarFilas();
+        llenarCB(1);
     }//GEN-LAST:event_jrbActivosActionPerformed
 
     private void jrbInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivosActionPerformed
         jcbEquipos.removeAllItems();
-//        llenarCB(0);
+        borrarFilas();
+        llenarCB(0);
     }//GEN-LAST:event_jrbInactivosActionPerformed
 
     private void jcbEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEquiposActionPerformed
-        
-        
-        
+    
     }//GEN-LAST:event_jcbEquiposActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        borrarFilas();
+        llenarTabla();
+        
+        Equipo equipo = (Equipo) jcbEquipos.getSelectedItem();
+        jtfProyecto.setText(equipo.getProyecto().getNombre());
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void llenarTabla(){
     
-//        DefaultTableModel modelo;
-//        Miembro miembro= (Miembro) jcbMateria.getSelectedItem();
-//        modelo = (DefaultTableModel) jtMiembros.getModel();
-//        jtAlumnos.setModel(modelo);
-//        List<Alumno> alumnos= insData.obtenerAlumnosXMateria(materia.getIdMateria());
-//        for(Alumno alu: alumnos){
-//          modelo.addRow(new Object[]{alu.getIdAlumno(), alu.getDni(),alu.getApellido(),alu.getNombre()});
-//        }
+        DefaultTableModel modelo;
+        modelo = (DefaultTableModel) jtMiembros.getModel();
+        jtMiembros.setModel(modelo);
+        
+        Equipo equipo = (Equipo) jcbEquipos.getSelectedItem();
+        List<EquiposMiembros> em = emd.listarEquipoMiembros(equipo.getIdEquipo());
+        
+        for(EquiposMiembros aux: em){
+            
+            if(aux.getMiembro().getEstado() == 1){
+                
+               modelo.addRow(new Object[]{aux.getMiembro().getDni(),aux.getMiembro().getApellido(), aux.getMiembro().getNombre(),
+                aux.getRol(),"Activo",aux.getFechaIncorporacion().toString()}); 
+               
+            }else{
+                
+                modelo.addRow(new Object[]{aux.getMiembro().getDni(),aux.getMiembro().getApellido(), aux.getMiembro().getNombre(),
+                aux.getRol(),"Inactivo",aux.getFechaIncorporacion().toString()});
+                
+            }
+            
+        }
     }
     
     private void borrarFilas(){
-//     modelo = (DefaultTableModel) jtAlumnos.getModel();
-//          jtAlumnos.setModel(modelo);
-//        // System.out.println("Cantidad de filas: "+ modelo.getRowCount());
-//      if(modelo.getRowCount()>0){
-//       int filas= modelo.getRowCount()-1;
-//       for(int i= filas; i>=0;i--){
-//         modelo.removeRow(i);
-//      }
-//    
-//    private void llenarCB(int estado){
-//        
-//        List<Equipo> equipos = ed.recuperarEquipos();
-//        
-//        for(Equipo e: equipos){
-//            
-//            if(e.getEstado() == estado){
-//                
-//                jcbEquipos.addItem(e);
-//                
-//            }
-//            
-//        }
+        DefaultTableModel modelo;
+        modelo = (DefaultTableModel) jtMiembros.getModel();
+        jtMiembros.setModel(modelo);
+        
+        if(modelo.getRowCount()>0){
+            
+            int filas= modelo.getRowCount()-1;
+            
+            for(int i= filas; i >= 0 ; i--){
+            modelo.removeRow(i);
+            }
+        }
+    }
+    
+    private void llenarCB(int estado){
+        
+        jcbEquipos.removeAllItems();
+        List<Equipo> equipos = ed.recuperarEquipos();
+        
+        for(Equipo e: equipos){
+            
+            if(e.getEstado() == estado){
+                
+                jcbEquipos.addItem(e);
+                
+            }
+            
+        }
         
     }
 
@@ -191,10 +270,14 @@ public class VistaConsultasEquipo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Equipo> jcbEquipos;
     private javax.swing.JRadioButton jrbActivos;
     private javax.swing.JRadioButton jrbInactivos;
     private javax.swing.JTable jtMiembros;
+    private javax.swing.JTextField jtfProyecto;
     // End of variables declaration//GEN-END:variables
 }
