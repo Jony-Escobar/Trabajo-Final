@@ -20,7 +20,7 @@ public class MiembroData {
     con = Conexion.getConexion();
     }
     
-    public void guardarMiembro(Miembro miembro){
+    public boolean guardarMiembro(Miembro miembro){
      String sql="INSERT INTO miembro (dni, apellido, nombre, estado) VALUES (?, ?, ?, ?)";
  
      try {
@@ -32,13 +32,16 @@ public class MiembroData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                miembro.setIdMiembro(rs.getInt("idMiembro"));
+                //miembro.setIdMiembro(rs.getInt("idMiembro"));
                 JOptionPane.showMessageDialog(null, "Nuevo miembro añadido con exito.");
             } 
+            
             ps.close();
+            return true;
             
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Miembro"+ex.getMessage());
+           return false;
         }
   } 
     
@@ -104,7 +107,7 @@ public class MiembroData {
   
   //Recuperar Miembros
   public List<Miembro> recuperarMiembros(){
-   String sql= "SELECT * FROM miembro";
+   String sql= "SELECT * FROM miembro WHERE estado=1";
    PreparedStatement ps= null;
    Miembro miembro= null;
    List<Miembro> lista= new ArrayList();
