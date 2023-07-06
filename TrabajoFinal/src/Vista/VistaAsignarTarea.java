@@ -161,11 +161,7 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtNombre.setText("");
-        jdcFechaCreacion.setCalendar(null);
-        jcbEquipo.setSelectedItem(null);
-        txtProyecto.setText("");
-        jcbMiembro.setSelectedItem(null);        
+        limpiar();        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
@@ -180,6 +176,7 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         tarea.setMiembroEq(miembros.get(jcbMiembro.getSelectedIndex()));
         tarea.setEstado(1);
         td.guardarTarea(tarea);
+        limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error. Debe llenar todos los campos. " + e.getMessage());
         }      
@@ -221,6 +218,14 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         if (jcbEquipo.getSelectedItem()!=null) {
             txtProyecto.setText(pd.buscarProyecto(equipo.getProyecto().getIdProyecto()).getNombre());
         }
+    }
+    public void limpiar(){
+        txtNombre.setText("");
+        jdcFechaCreacion.setDate(Calendar.getInstance().getTime());
+        //jdcFechaCreacion.setCalendar(null);
+        jcbEquipo.setSelectedItem(null);
+        txtProyecto.setText("");
+        jcbMiembro.setSelectedItem(null);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;

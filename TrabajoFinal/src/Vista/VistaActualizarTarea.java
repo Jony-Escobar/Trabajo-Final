@@ -1,14 +1,18 @@
 package Vista;
 
+import AccesoADatos.ComentariosData;
 import AccesoADatos.EquipoData;
 import AccesoADatos.EquipoMiembrosData;
 import AccesoADatos.TareaData;
+import Modelo.Comentarios;
 import Modelo.Equipo;
 import Modelo.EquiposMiembros;
 import Modelo.Miembro;
 import Modelo.Tarea;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class VistaActualizarTarea extends javax.swing.JInternalFrame {
 
@@ -65,6 +69,11 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +193,21 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
         cmbTarea.removeAllItems();
         llenarComboTarea();
     }//GEN-LAST:event_cmbMiembroActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Comentarios comentario = new Comentarios();
+            ComentariosData cd = new ComentariosData();
+            Tarea tarea = (Tarea) cmbTarea.getSelectedItem();
+            comentario.setComentario(txtComentario.getText());
+            comentario.setFechaAvance(jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            comentario.setTarea(tarea);
+            cd.guardarComentarios(comentario);
+            limpiar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Debe llenar todos los campos. " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
     public void llenarComboEquipo(){
         EquipoData ed = new EquipoData();
         List<Equipo> equipos= ed.recuperarEquipos();        
@@ -213,7 +237,7 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
         cmbMiembro.setSelectedItem(null);
         cmbTarea.setSelectedItem(null);
         txtComentario.setText("");
-        jdcFecha.setCalendar(null);         
+        jdcFecha.setDate(Calendar.getInstance().getTime());         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
