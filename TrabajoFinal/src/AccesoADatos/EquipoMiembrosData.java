@@ -229,7 +229,6 @@ public class EquipoMiembrosData {
     
     }
     
-    
     public List<EquiposMiembros> listarEquipoMiembros(int idEquipo) {
 
         List<EquiposMiembros> equiposmiembros = new ArrayList<>();
@@ -268,4 +267,5 @@ public class EquipoMiembrosData {
         return equiposmiembros;
     
     }
+    
 }    

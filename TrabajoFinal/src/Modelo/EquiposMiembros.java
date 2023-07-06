@@ -71,7 +71,7 @@ public class EquiposMiembros {
 
     @Override
     public String toString() {
-        return "EquiposMiembros{" + "idMiembroEq=" + idMiembroEq + ", fechaIncorporacion=" + fechaIncorporacion + ", equipo=" + equipo + ", miembro=" + miembro + ", rol=" + rol + '}';
+        return miembro.getIdMiembro() + " " + miembro.getApellido() + ", " + miembro.getNombre();
     }
 
 }

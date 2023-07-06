@@ -97,6 +97,33 @@ public class ProyectoData {
         return proyectos;
     }
   
+  public List<Proyecto> listarProyectosEstado(int estado) {
+
+        List<Proyecto> proyectos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM proyecto WHERE estado = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, estado);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proyecto proy = new Proyecto();
+
+                proy.setIdProyecto(rs.getInt("idProyecto"));
+                proy.setNombre(rs.getString("nombre"));
+                proy.setDescripcion(rs.getString("descripcion"));
+                proy.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                proy.setEstado(rs.getInt("estado"));
+                proyectos.add(proy);
+            }
+            ps.close();
+           
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la Tabla Proyecto "+ex.getMessage());
+        }
+        return proyectos;
+    }
+  
   public void completarProyecto(int idProyecto){
     try {
             String sql = "UPDATE proyecto SET estado = 0 WHERE idProyecto = ? ";
