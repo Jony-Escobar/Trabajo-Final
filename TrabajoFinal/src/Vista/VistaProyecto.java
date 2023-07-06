@@ -1,16 +1,22 @@
 package Vista;
 
+import AccesoADatos.EquipoData;
 import AccesoADatos.ProyectoData;
+import Modelo.Equipo;
 import Modelo.Proyecto;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class VistaProyecto extends javax.swing.JInternalFrame {
 
     public VistaProyecto() {
         initComponents();
-        
+        //Seteo como fecha maxima, la fecha de hoy
+        jdcFechaCreacion.setMaxSelectableDate(Calendar.getInstance().getTime());
         //Desactivamos todo
         desactivar();
     }
@@ -33,11 +39,11 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         buttonLimpiar = new javax.swing.JButton();
         textFieldDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        radioButtonEstado = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         textFieldID = new javax.swing.JTextField();
         jdcFechaCreacion = new com.toedter.calendar.JDateChooser();
         btnBuscar = new javax.swing.JButton();
+        comboBoxEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -146,10 +152,9 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)))
+                                    .addComponent(jLabel6))))
                         .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(textFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(textFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +162,9 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                                 .addComponent(btnBuscar))
                             .addComponent(jdcFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(radioButtonEstado))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(comboBoxEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(130, 130, 130)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,9 +198,10 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addComponent(radioButtonEstado))
-                    .addComponent(jLabel5))
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(comboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonModificar)
@@ -215,7 +223,6 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         textFieldNombre.setEnabled(true);
         jdcFechaCreacion.setEnabled(true);
         textFieldDescripcion.setEnabled(true);
-        radioButtonEstado.setEnabled(true);
         buttonCrear.setEnabled(true);
         limpiar();
     }//GEN-LAST:event_radioButtonCrearActionPerformed
@@ -237,7 +244,13 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         ProyectoData pd = new ProyectoData();
         
         try {            
-            if(jdcFechaCreacion.toString().isEmpty()){
+            
+            if(textFieldNombre.getText().equals("") || textFieldID.getText().matches("[0-9]+")){
+                textFieldNombre.requestFocus();
+                throw new Exception("Por favor, ingrese un nombre.");
+            }
+            
+            if(jdcFechaCreacion.getDate() == null){
                 jdcFechaCreacion.requestFocus();
                 throw new Exception("Por favor, ingrese una fecha.");
             }
@@ -250,11 +263,7 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
             pr.setNombre(textFieldNombre.getText());
             pr.setDescripcion(textFieldDescripcion.getText());
             pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());//SETEAR FECHA
-            if(radioButtonEstado.isSelected()){
-                pr.setEstado(true);
-            }else{
-                pr.setEstado(false);
-            }            
+            pr.setEstado(2);
             pd.guardarProyecto(pr);
             limpiar();
         } catch (Exception e) {
@@ -269,13 +278,18 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
         ProyectoData pd = new ProyectoData();
         
         try {
-            
-            if(textFieldID.getText().equals("")){
+           
+            if(textFieldID.getText().equals("") || validar(textFieldID.getText())){
                 textFieldID.requestFocus();
-                throw new Exception("Por favor, ingrese un ID.");
+                throw new Exception("Por favor, ingrese un ID valido.");
             }
             
-            if(jdcFechaCreacion.toString().isEmpty()){
+            if(textFieldNombre.getText().equals("")){
+                textFieldNombre.requestFocus();
+                throw new Exception("Por favor, ingrese un nombre.");
+            }
+            
+            if(jdcFechaCreacion.getDate() == null){
                 jdcFechaCreacion.requestFocus();
                 throw new Exception("Por favor, ingrese una fecha.");
             }
@@ -289,9 +303,26 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
             pr.setNombre(textFieldNombre.getText());
             pr.setFechaInicio(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             pr.setDescripcion(textFieldDescripcion.getText());
-            pr.setEstado(radioButtonEstado.isSelected());
+            
+            EquipoData ed = new EquipoData();
+            
+            if(!ed.buscarEquipoProyecto(Integer.parseInt(textFieldID.getText())).isEmpty()){
+               pr.setEstado(comboBoxEstado.getSelectedIndex()); 
+            }else{
+                
+                if(comboBoxEstado.getSelectedIndex() == 0){
+                    pr.setEstado(2);
+                }else{
+                    pr.setEstado(3);
+                }
+            }
             pd.modificarProyecto(pr);
             
+            desactivar();
+            textFieldID.setEnabled(true);
+            btnBuscar.setEnabled(true);
+            limpiar();
+            textFieldID.requestFocus();
         } catch (Exception e) {
             
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -302,38 +333,118 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ProyectoData pd = new ProyectoData();
-        Proyecto proyecto = pd.buscarProyecto(Integer.parseInt(textFieldID.getText()));
-        if (proyecto != null) {
-            desactivar();
-            textFieldNombre.setEnabled(true);
-            jdcFechaCreacion.setEnabled(true);
-            textFieldDescripcion.setEnabled(true);
-            radioButtonEstado.setEnabled(true);
-            buttonModificar.setEnabled(true);
+
+        try {
+            
+           if(textFieldID.getText().equals("") || validar(textFieldID.getText())){
+               throw new Exception("Por favor, ingrese un id valido");
+           }
+            
+            Proyecto proyecto = pd.buscarProyecto(Integer.parseInt(textFieldID.getText()));
+            
+            if (proyecto != null) {
+                desactivar();
+                textFieldNombre.setEnabled(true);
+                jdcFechaCreacion.setEnabled(true);
+                textFieldDescripcion.setEnabled(true);
+                comboBoxEstado.setEnabled(true);
+                buttonModificar.setEnabled(true);
+
+                textFieldNombre.setText(proyecto.getNombre());
+                jdcFechaCreacion.setDate(Date.from(proyecto.getFechaInicio().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                textFieldDescripcion.setText(proyecto.getDescripcion());
+
+                EquipoData ed = new EquipoData();
+                List<Equipo> lista = ed.buscarEquipoProyecto(Integer.parseInt(textFieldID.getText()));
+
+                if(lista.isEmpty()){
+                    llenarComboBox(true);
+                    if(proyecto.getEstado() == 2){
+                        comboBoxEstado.setSelectedIndex(0);
+                    }else{
+                        comboBoxEstado.setSelectedIndex(1);
+                    }
+
+                }else{
+                    llenarComboBox(false);
+                   comboBoxEstado.setSelectedIndex(proyecto.getEstado()); 
+                }
+            
+            
+            }else{
+                textFieldID.requestFocus();
+                textFieldID.setText("");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("catch");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            limpiar();
         }
-        textFieldNombre.setText(proyecto.getNombre());
-        jdcFechaCreacion.setDate(Date.from(proyecto.getFechaInicio().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        //Date.from(proyecto.getFechaInicio().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        textFieldDescripcion.setText(proyecto.getDescripcion());
-        radioButtonEstado.setSelected(proyecto.getEstado());
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
     
     private void limpiar (){
         textFieldID.setText("");
         textFieldNombre.setText("");
         textFieldDescripcion.setText("");
-        radioButtonEstado.setSelected(false);
+        comboBoxEstado.removeAllItems();
         jdcFechaCreacion.setCalendar(null);
     }
+    
     private void desactivar (){
         textFieldID.setEnabled(false);
         textFieldNombre.setEnabled(false);
         jdcFechaCreacion.setEnabled(false);
         textFieldDescripcion.setEnabled(false);
-        radioButtonEstado.setEnabled(false);
+        comboBoxEstado.setEnabled(false);
         btnBuscar.setEnabled(false);
         buttonCrear.setEnabled(false);
         buttonModificar.setEnabled(false);
+    }
+    
+    private void llenarComboBox(boolean nulo){
+        
+        comboBoxEstado.removeAllItems();
+        
+        if(radioButtonModificar.isSelected() && nulo == false){
+            
+            comboBoxEstado.addItem("Completado");
+            comboBoxEstado.addItem("En progreso");
+            comboBoxEstado.addItem("Pausado");
+            comboBoxEstado.addItem("Eliminado");
+            
+        }else if(radioButtonModificar.isSelected() && nulo == true){
+            comboBoxEstado.addItem("Pausado");
+            comboBoxEstado.addItem("Eliminado");
+        }
+    }
+    
+    private boolean validar(String texto){
+        char prueba[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+        boolean check;
+        for(int i = 0; i < texto.length(); i++){
+            
+            check = true;
+            
+            for(char a: prueba){
+                
+                if(texto.charAt(i) == a){
+                    check = false;
+                }
+                    
+            }
+            
+            if(check){
+                
+                return true;
+                
+            }
+            
+        }
+        
+        return false;
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -343,6 +454,7 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonLimpiar;
     private javax.swing.JButton buttonModificar;
     private javax.swing.JButton buttonSalir;
+    private javax.swing.JComboBox<String> comboBoxEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,7 +463,6 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private com.toedter.calendar.JDateChooser jdcFechaCreacion;
     private javax.swing.JRadioButton radioButtonCrear;
-    private javax.swing.JRadioButton radioButtonEstado;
     private javax.swing.JRadioButton radioButtonModificar;
     private javax.swing.JTextField textFieldDescripcion;
     private javax.swing.JTextField textFieldID;

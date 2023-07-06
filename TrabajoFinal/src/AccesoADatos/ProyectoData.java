@@ -28,11 +28,10 @@ public class ProyectoData {
             ps.setString(1, proyecto.getNombre());
             ps.setString(2, proyecto.getDescripcion());
             ps.setDate(3, Date.valueOf(proyecto.getFechaInicio()));//localDate a Date
-            ps.setBoolean(4, proyecto.getEstado());
+            ps.setInt(4, proyecto.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                //proyecto.setIdProyecto(rs.getInt("idProyecto"));
                 JOptionPane.showMessageDialog(null, "Proyecto añadido con exito.");
             } 
             ps.close();
@@ -57,7 +56,7 @@ public class ProyectoData {
                 proyecto.setNombre(rs.getString("nombre"));
                 proyecto.setDescripcion(rs.getString("descripcion"));
                 proyecto.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
-                proyecto.setEstado(rs.getBoolean("estado"));
+                proyecto.setEstado(rs.getInt("estado"));
                 ps.close();
                 } 
             else {
@@ -86,7 +85,7 @@ public class ProyectoData {
                 proy.setNombre(rs.getString("nombre"));
                 proy.setDescripcion(rs.getString("descripcion"));
                 proy.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
-                proy.setEstado(rs.getBoolean("estado"));
+                proy.setEstado(rs.getInt("estado"));
                 proyectos.add(proy);
             }
             ps.close();
@@ -98,7 +97,7 @@ public class ProyectoData {
         return proyectos;
     }
   
-  public void eliminarProyecto(int idProyecto){
+  public void completarProyecto(int idProyecto){
     try {
             String sql = "UPDATE proyecto SET estado = 0 WHERE idProyecto = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -131,19 +130,50 @@ public class ProyectoData {
         }
     }
   
+  public void pausarProyecto(int idProyecto){
+    try {
+            String sql = "UPDATE proyecto SET estado = 2 WHERE idProyecto = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProyecto);
+            int fila=ps.executeUpdate();
+          
+            if(fila==1){
+                JOptionPane.showMessageDialog(null, " Se elimino el proyecto.");
+            }
+              ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Proyecto");
+        }
+  }
+  
+  public void eliminarProyecto(int idProyecto){
+    try {
+            String sql = "UPDATE proyecto SET estado = 3 WHERE idProyecto = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProyecto);
+            int fila=ps.executeUpdate();
+          
+            if(fila==1){
+                JOptionPane.showMessageDialog(null, " Se elimino el proyecto.");
+            }
+              ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Proyecto");
+        }
+  }
+  
   public void modificarProyecto(Proyecto proyecto) {
 
-        String sql = "UPDATE proyecto SET idProyecto = ? , nombre = ?, descripcion = ?, fechaInicio = ?, estado = ? WHERE  idProyecto = ?";
+        String sql = "UPDATE proyecto SET nombre = ?, descripcion = ?, fechaInicio = ?, estado = ? WHERE  idProyecto = ?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, proyecto.getIdProyecto());
-            ps.setString(2, proyecto.getNombre());
-            ps.setString(3, proyecto.getDescripcion());
-            ps.setDate(4, Date.valueOf(proyecto.getFechaInicio()));
-            ps.setBoolean(5, proyecto.getEstado());
-            ps.setInt(6, proyecto.getIdProyecto());
+            ps.setString(1, proyecto.getNombre());
+            ps.setString(2, proyecto.getDescripcion());
+            ps.setDate(3, Date.valueOf(proyecto.getFechaInicio()));
+            ps.setInt(4, proyecto.getEstado());
+            ps.setInt(5, proyecto.getIdProyecto());
             
             int exito = ps.executeUpdate();
             

@@ -9,12 +9,12 @@ public class Proyecto {
     private String nombre;
     private String descripcion;
     private LocalDate fechaInicio;
-    private boolean estado;
+    private int estado;
 
     public Proyecto() {
     }
 
-    public Proyecto(String nombre, String descripcion, LocalDate fechaInicio, boolean estado) {
+    public Proyecto(String nombre, String descripcion, LocalDate fechaInicio, int estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
@@ -23,7 +23,7 @@ public class Proyecto {
 
     
     
-    public Proyecto(int idProyecto, String nombre, String descripcion, LocalDate fechaInicio, boolean estado) {
+    public Proyecto(int idProyecto, String nombre, String descripcion, LocalDate fechaInicio, int estado) {
         this.idProyecto = idProyecto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -63,11 +63,11 @@ public class Proyecto {
         this.fechaInicio = fechaInicio;
     }
 
-    public boolean getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

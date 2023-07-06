@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class EquipoData {
     private Connection con = null;
-    Equipo equipo= null;
+    //Equipo equipo= null;
     
 
     public EquipoData() {
@@ -34,7 +34,6 @@ public void guardarEquipo(Equipo equipo){
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                equipo.setIdEquipo(rs.getInt("idEquipo"));
                 JOptionPane.showMessageDialog(null, "Equipo añadido con exito.");
             } 
             ps.close();
@@ -44,74 +43,61 @@ public void guardarEquipo(Equipo equipo){
         }
 }
 
-public boolean modificarEquipo(Equipo equipo){
- String sql= "UPDATE `equipo` SET `nombre`=?,`fechaCreacion`=?,`estado`=? WHERE idEquipo=?";
- PreparedStatement ps = null;
-        int exito;
-        boolean modificado= false;
-        try {
-            ps = con.prepareStatement(sql);
-            //ps.setInt(1, miembro.getIdMiembro());
-            ps.setString(1, equipo.getNombre());
-            ps.setDate(2, Date.valueOf(equipo.getFechaCreacion()));
-            ps.setInt(3, equipo.getEstado());
-            ps.setInt(4, equipo.getIdEquipo());
-            //ps.setInt(5, miembro.getIdMiembro());
-            exito = ps.executeUpdate();
+public void modificarEquipo(Equipo equipo){
+    String sql= "UPDATE `equipo` SET `nombre`=?,`fechaCreacion`=?,`estado`=? WHERE idEquipo=?";
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, equipo.getNombre());
+        ps.setDate(2, Date.valueOf(equipo.getFechaCreacion()));
+        ps.setInt(3, equipo.getEstado());
+        ps.setInt(4, equipo.getIdEquipo());
+        int exito = ps.executeUpdate();
             
-            if (exito == 1) {
-              // JOptionPane.showMessageDialog(null, "Equipo modificado exitosamente.");
-               modificado= true;
-               return modificado;
-            } else {
-               JOptionPane.showMessageDialog(null, "No se encontró el Equipo");
-               modificado= false;
-                return false;
-            }
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Equipo modificado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el Equipo");
+        }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Equipo");
-        }
-        return modificado;
+        }    
         
-    }
+}
 
 public Equipo buscarEquipo(int idEquipo){
   
     String sql= "SELECT * FROM equipo WHERE idEquipo=?";
     PreparedStatement ps= null;
-    Equipo equipo= null;
+    Equipo equipo= new Equipo();
     try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1,idEquipo);
-            ResultSet rs = ps.executeQuery();
+        ps = con.prepareStatement(sql);
+        ps.setInt(1,idEquipo);
+        ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                equipo= new Equipo();
-                equipo.setIdEquipo(rs.getInt("idEquipo"));
-                //equipo.setIdProyecto(rs.getInt("idProyecto"));
-                ProyectoData pd = new ProyectoData();
-                equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
-                equipo.setNombre(rs.getString("nombre"));
-                equipo.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
-                equipo.setEstado(rs.getInt("estado"));
-                } 
-            else {
+        if (rs.next()) {
+            ProyectoData pd = new ProyectoData();
+            equipo.setIdEquipo(rs.getInt("idEquipo"));
+            equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
+            equipo.setNombre(rs.getString("nombre"));
+            equipo.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+            equipo.setEstado(rs.getInt("estado"));
+            }else {
                 JOptionPane.showMessageDialog(null, "No existe ese equipo");
             }
             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Equipo "+ex.getMessage());
-        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Equipo "+ex.getMessage());
+    }
 
-        return equipo;
+    return equipo;
     
-  
 }
 
-public Equipo buscarEquipoProyecto(int idProyecto){
+/*public Equipo buscarEquipoProyecto(int idProyecto){
   
-    String sql= "SELECT * FROM equipo WHERE idProyecto=? && estado=1";
+    String sql= "SELECT * FROM equipo WHERE idProyecto=?";
     PreparedStatement ps= null;
     //Equipo equipo= null;
     try {
@@ -141,42 +127,74 @@ public Equipo buscarEquipoProyecto(int idProyecto){
         return equipo;
     
   
+}*/
+
+public List<Equipo> buscarEquipoProyecto(int idProyecto){
+    
+    List<Equipo> equipos = new ArrayList<>();
+  
+    try{
+        String sql = "SELECT * FROM equipo WHERE idProyecto=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1,idProyecto);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()){
+            Equipo equipo = new Equipo();
+            ProyectoData pd = new ProyectoData();
+            
+            equipo.setIdEquipo(rs.getInt("idEquipo"));
+            equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
+            equipo.setNombre(rs.getString("nombre"));
+            equipo.setFechaCreacion(rs.getDate("fechaCreacion").toLocalDate());
+            equipo.setEstado(rs.getInt("estado"));
+            equipos.add(equipo);
+        }
+        ps.close();
+
+    }catch (SQLException ex){
+        JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Equipo "+ex.getMessage());
+    }
+    return equipos;   
 }
 
+
 public void eliminarEquipo(int idEquipo){
-  try{
-    String sql = "UPDATE equipo SET estado = 0 WHERE idEquipo = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idEquipo);
-            int fila=ps.executeUpdate();
+    
+    try{
+      
+        String sql = "UPDATE equipo SET estado = 0 WHERE idEquipo = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idEquipo);
+        int fila=ps.executeUpdate();
           
-            if(fila==1){
-                JOptionPane.showMessageDialog(null, " Se elimino el equipo.");
-            }
-              ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Equipo");
+        if(fila==1){
+            JOptionPane.showMessageDialog(null, " Se elimino el equipo.");
         }
+        ps.close();
+        
+    }catch (SQLException e){
+        JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Equipo");
+    }
 
 }
 
 public void activarEquipo(int idEquipo) {
 
-        try {
-            String sql = "UPDATE equipo SET estado = 1 WHERE idEquipo = ? ";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idEquipo);
-            int fila=ps.executeUpdate();
-            if(fila==1){
-                JOptionPane.showMessageDialog(null, " Se activo el equipo.");
-            }
+    try {
+        String sql = "UPDATE equipo SET estado = 1 WHERE idEquipo = ? ";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idEquipo);
+        int fila=ps.executeUpdate();
+        
+        if(fila==1){
+            JOptionPane.showMessageDialog(null, " Se activo el equipo.");
+        }
         ps.close();    
 
-        } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Equipo");
-        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Equipo");
     }
+}
 
 public List<Equipo> recuperarEquipos(){
   List<Equipo> equipos = new ArrayList<>();
@@ -188,7 +206,6 @@ public List<Equipo> recuperarEquipos(){
                 Equipo equipo = new Equipo();
 
                 equipo.setIdEquipo(rs.getInt("idEquipo"));
-                //equipo.setIdProyecto(rs.getInt("idProyecto"));
                 ProyectoData pd = new ProyectoData();
                 equipo.setProyecto(pd.buscarProyecto(rs.getInt("idProyecto")));
                 equipo.setNombre(rs.getString("nombre"));
