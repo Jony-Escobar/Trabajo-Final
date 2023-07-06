@@ -34,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
         jmiMiembro = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -144,6 +145,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem3);
 
+        jMenuItem4.setText("Modificar / Eliminar ");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem4);
+
         jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
@@ -236,6 +245,16 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vat);
     }//GEN-LAST:event_menuItemActualizarEstadoTareaActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaModificarMiembroEquipo vmme= new VistaModificarMiembroEquipo();
+        vmme.setVisible(true);
+        escritorio.add(vmme);
+        escritorio.moveToFront(vmme);
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -285,6 +304,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jmiMiembro;
     private javax.swing.JMenuItem menuItemActualizarEstadoTarea;
     private javax.swing.JMenuItem menuItemAsignarTarea;
