@@ -11,6 +11,7 @@ import AccesoADatos.TareaData;
 import Modelo.Equipo;
 import Modelo.EquiposMiembros;
 import Modelo.Miembro;
+import Modelo.Proyecto;
 import Modelo.Tarea;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -56,6 +57,9 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
         jcdFechaCierre = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jcbTarea = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel1.setText("Tarea");
 
@@ -93,6 +97,18 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Guardar");
+
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setText("Modificar Tarea");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +136,12 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
                                     .addComponent(jcbEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jcbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jcdFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(105, 105, 105)
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -129,12 +150,17 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtfNombre)
                                     .addComponent(jcbTarea, 0, 202, Short.MAX_VALUE))))
-                        .addContainerGap(243, Short.MAX_VALUE))))
+                        .addContainerGap(38, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(195, 195, 195)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,15 +185,17 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jcbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcdFechaCierre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                    .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -175,6 +203,7 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
 
     private void jcbEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEquipoActionPerformed
         // TODO add your handling code here:
+        jcbMiembro.removeAllItems();
         if(jcbEquipo.getSelectedItem()!=null){
           Equipo equipo= (Equipo) jcbEquipo.getSelectedItem();
           EquipoData equiData= new EquipoData();
@@ -195,6 +224,8 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
          Equipo equipo= (Equipo) jcbEquipo.getSelectedItem();
          Miembro miembro= (Miembro) jcbMiembro.getSelectedItem();
          EquiposMiembros em= emd.EquipoMiembro(equipo.getIdEquipo(), miembro.getIdMiembro());
+         Proyecto proyecto= equipo.getProyecto();
+         jtfProyecto.setText(proyecto.getNombre());
          TareaData td= new TareaData();
          List<Tarea> t= td.listarTareasPorMiembroEquipo(em.getIdMiembroEq());
          if(t.size()>0){
@@ -223,6 +254,11 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jcbTareaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void llenarComboEquipo(){
     Equipo equipo= new Equipo();
     EquipoData equiData= new EquipoData();
@@ -234,9 +270,14 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
     }
     }
     
+    public void limpiar(){
+     
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -245,6 +286,7 @@ public class VistaModificarTarea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<Equipo> jcbEquipo;
     private javax.swing.JComboBox<String> jcbEstado;
     private javax.swing.JComboBox<Miembro> jcbMiembro;
