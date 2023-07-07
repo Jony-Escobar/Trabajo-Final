@@ -8,6 +8,7 @@ import Modelo.Equipo;
 import Modelo.EquiposMiembros;
 import Modelo.Miembro;
 import Modelo.Tarea;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
@@ -18,9 +19,12 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
     public VistaAsignarTarea() {
         initComponents();
         llenarComboEquipo();
-        jcbEquipo.setSelectedItem(null);
+        //jcbEquipo.setSelectedItem(null);
+        jcbEquipo.setSelectedIndex(-1);
         txtProyecto.setEditable(false);
         jdcFechaCreacion.setDate(Calendar.getInstance().getTime());
+        jrbPendiente.setSelected(true);
+        jrbPendiente.setEnabled(false);
         //jdcFechaCreacion.setEnabled(false);
         //jdcFechaCreacion.getComponent(1).setEnabled(false);
     }
@@ -43,6 +47,8 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         jcbEquipo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         txtProyecto = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jrbPendiente = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("NUEVA TAREA");
@@ -90,18 +96,27 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Miembro:");
 
+        jLabel4.setText("Estado");
+
+        jrbPendiente.setText("Pendiente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(227, 227, 227))
             .addGroup(layout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(btnLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(65, 65, 65)
                         .addComponent(btnAsignar)
-                        .addGap(80, 80, 80)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,8 +124,10 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel7)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel6)))
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel8))))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jdcFechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,12 +135,9 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
                             .addComponent(jcbEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtProyecto, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcbMiembro, javax.swing.GroupLayout.Alignment.LEADING, 0, 194, Short.MAX_VALUE)))))
+                                .addComponent(jcbMiembro, javax.swing.GroupLayout.Alignment.LEADING, 0, 194, Short.MAX_VALUE))
+                            .addComponent(jrbPendiente))))
                 .addContainerGap(117, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(227, 227, 227))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,12 +163,15 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jrbPendiente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
                     .addComponent(btnAsignar)
-                    .addComponent(btnSalir)
-                    .addComponent(btnLimpiar))
-                .addGap(49, 49, 49))
+                    .addComponent(btnSalir)))
         );
 
         pack();
@@ -169,10 +186,12 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         Tarea tarea = new Tarea();
         TareaData td = new TareaData();
         EquipoMiembrosData emd = new EquipoMiembrosData();
-        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex());
+        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex()+1);
         tarea.setNombre(txtNombre.getText());
         tarea.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        tarea.setFechaCierre(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        //tarea.setFechaCierre(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        LocalDate ld= null;
+        tarea.setFechaCierre(ld);  //Le asignamos null a la fecha de cierre de la tarea
         tarea.setMiembroEq(miembros.get(jcbMiembro.getSelectedIndex()));
         tarea.setEstado(1);
         td.guardarTarea(tarea);
@@ -191,6 +210,7 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbMiembroActionPerformed
 
     private void jcbEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEquipoActionPerformed
+        
         jcbMiembro.removeAllItems();
         txtProyecto.setText("");
         llenarComboMiembro();
@@ -203,15 +223,30 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         for(Equipo e: equipos){
             jcbEquipo.addItem(e);
         }
+       // jcbEquipo.setSelectedIndex(-1); //agregado
     }
     
     public void llenarComboMiembro(){
+        if(jcbEquipo.getSelectedItem()!=null){  //if agregado para control del jcbEquipo
         EquipoMiembrosData emd = new EquipoMiembrosData();
-        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex());
-        for(EquiposMiembros m: miembros){
-            jcbMiembro.addItem(m.getMiembro());
+        Equipo equipo= (Equipo) jcbEquipo.getSelectedItem();
+        List<Miembro> lm= emd.miembrosDelEquipo(equipo.getIdEquipo());
+        if(lm.size()>0){
+         for(Miembro m: lm){
+          jcbMiembro.addItem(m);
+         }
         }
+        }
+        else{ //else agregado para control
+          //JOptionPane.showMessageDialog(this, "Elija un equipo");
+          jcbEquipo.requestFocus();
+        }
+        //List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex()+1);
+        //for(EquiposMiembros m: miembros){
+        //    jcbMiembro.addItem(m.getMiembro());
+        //}
     }
+    
     public void llenarTxtProyecto(){
         ProyectoData pd = new ProyectoData();
         Equipo equipo = (Equipo) jcbEquipo.getSelectedItem();
@@ -225,7 +260,8 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         //jdcFechaCreacion.setCalendar(null);
         jcbEquipo.setSelectedItem(null);
         txtProyecto.setText("");
-        jcbMiembro.setSelectedItem(null);
+        //jcbMiembro.setSelectedItem(null);
+        jcbMiembro.removeAllItems();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;
@@ -234,12 +270,14 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JComboBox<Equipo> jcbEquipo;
     private javax.swing.JComboBox<Miembro> jcbMiembro;
     private com.toedter.calendar.JDateChooser jdcFechaCreacion;
+    private javax.swing.JRadioButton jrbPendiente;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtProyecto;
     // End of variables declaration//GEN-END:variables

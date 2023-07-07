@@ -32,7 +32,7 @@ public void guardarTarea(Tarea tarea){
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                tarea.setIdTarea(rs.getInt("idTarea"));
+                //tarea.setIdTarea(rs.getInt("idTarea"));
                 JOptionPane.showMessageDialog(null, "Tarea añadida exitosamente.");
             } 
             ps.close();
@@ -41,6 +41,8 @@ public void guardarTarea(Tarea tarea){
            JOptionPane.showMessageDialog(null, "Error al acceder a la tarea "+ex.getMessage());
         }
 }
+
+
     
 public List<Tarea> listarTareasPorMiembroEquipo(int idMiembroEq) {
     List<Tarea> tareas = new ArrayList<>();

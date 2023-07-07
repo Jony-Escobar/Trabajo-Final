@@ -107,13 +107,13 @@ public class VistaMiembroEquipo extends javax.swing.JInternalFrame {
      boolean validacion= false;
      if(jcbEquipo.getSelectedItem()!= null){
          jlEquipo.setVisible(false);
-         if(jcbMiembro.getSelectedItem()!=null){
+         if(jcbNoMiembros.getSelectedItem()!=null){ //modificado
              jlMiembro.setVisible(false);
-           if(jdcFechaIncorporacion.getDate()!=null){
-             jlFecha.setVisible(false);
-             if(!jtfRol.getText().isEmpty()){
-                jlRol.setVisible(false);
-                validacion= true;
+              if(jdcFechaIncorporacion.getDate()!=null){
+                 jlFecha.setVisible(false);
+                   if(!jtfRol.getText().isEmpty()){
+                     jlRol.setVisible(false);
+                     validacion= true;
                 return validacion;
              }
              else{
@@ -129,7 +129,7 @@ public class VistaMiembroEquipo extends javax.swing.JInternalFrame {
          }
          else{
           jlMiembro.setVisible(true);
-          jcbMiembro.requestFocus();
+          jcbNoMiembros.requestFocus(); //modificacion
          }
         }
      else{
@@ -440,8 +440,8 @@ public class VistaMiembroEquipo extends javax.swing.JInternalFrame {
 
     private void jbAgregarMiembroEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarMiembroEquipoActionPerformed
         // TODO add your handling code here:
-        boolean flag= false;
-        if(validar()){
+      boolean flag= false;
+      if(validar()){
             
         equipo= (Equipo) jcbEquipo.getSelectedItem();
         miembro= (Miembro) jcbNoMiembros.getSelectedItem();
