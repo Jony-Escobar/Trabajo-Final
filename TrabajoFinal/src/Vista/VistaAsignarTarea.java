@@ -186,13 +186,15 @@ public class VistaAsignarTarea extends javax.swing.JInternalFrame {
         Tarea tarea = new Tarea();
         TareaData td = new TareaData();
         EquipoMiembrosData emd = new EquipoMiembrosData();
-        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex()+1);
+        //List<EquiposMiembros> miembros = emd.listarEquipoMiembros(jcbEquipo.getSelectedIndex()+1);
         tarea.setNombre(txtNombre.getText());
         tarea.setFechaCreacion(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         //tarea.setFechaCierre(jdcFechaCreacion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        LocalDate ld= null;
+        LocalDate ld= LocalDate.of(0000, 1, 1);
         tarea.setFechaCierre(ld);  //Le asignamos null a la fecha de cierre de la tarea
-        tarea.setMiembroEq(miembros.get(jcbMiembro.getSelectedIndex()));
+        Equipo e = (Equipo)jcbEquipo.getSelectedItem();
+        Miembro m = (Miembro) jcbMiembro.getSelectedItem();
+        tarea.setMiembroEq(emd.EquipoMiembro(e.getIdEquipo(), m.getIdMiembro()));
         tarea.setEstado(1);
         td.guardarTarea(tarea);
         limpiar();

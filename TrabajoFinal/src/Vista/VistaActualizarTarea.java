@@ -43,6 +43,8 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
         cmbTarea = new javax.swing.JComboBox<>();
         jdcFecha = new com.toedter.calendar.JDateChooser();
         jSeparator1 = new javax.swing.JSeparator();
+        jbBuscarMiembros = new javax.swing.JButton();
+        jbBuscarTareas = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -98,6 +100,20 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBuscarMiembros.setText("Buscar Miembros");
+        jbBuscarMiembros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarMiembrosActionPerformed(evt);
+            }
+        });
+
+        jbBuscarTareas.setText("Buscar Tareas");
+        jbBuscarTareas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarTareasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,8 +121,7 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
@@ -115,27 +130,39 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(130, 130, 130))
+                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(170, 170, 170))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbMiembro, javax.swing.GroupLayout.Alignment.LEADING, 0, 164, Short.MAX_VALUE)
+                                    .addComponent(cmbEquipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbBuscarMiembros)
+                                    .addComponent(jbBuscarTareas))))
+                        .addGap(130, 130, 130))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLimpiar)
-                        .addGap(85, 85, 85)
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)))
-                .addGap(72, 72, 72))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLimpiar)
+                                .addGap(85, 85, 85)
+                                .addComponent(btnGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                                .addComponent(btnSalir)))
+                        .addGap(72, 72, 72))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,13 +171,17 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(cmbEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(jbBuscarMiembros))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarTareas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cmbTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,7 +196,7 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnGuardar)
@@ -185,13 +216,11 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void cmbEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEquipoActionPerformed
-        cmbMiembro.removeAllItems();
-        llenarComboMiembro();
+        
     }//GEN-LAST:event_cmbEquipoActionPerformed
 
     private void cmbMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMiembroActionPerformed
-        cmbTarea.removeAllItems();
-        llenarComboTarea();
+        
     }//GEN-LAST:event_cmbMiembroActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -208,6 +237,17 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error. Debe llenar todos los campos. " + e.getMessage());
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jbBuscarMiembrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMiembrosActionPerformed
+        cmbMiembro.removeAllItems();
+        llenarComboMiembro();
+    }//GEN-LAST:event_jbBuscarMiembrosActionPerformed
+
+    private void jbBuscarTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarTareasActionPerformed
+        cmbTarea.removeAllItems();
+        llenarComboTarea();
+    }//GEN-LAST:event_jbBuscarTareasActionPerformed
+    
     public void llenarComboEquipo(){
         EquipoData ed = new EquipoData();
         List<Equipo> equipos= ed.recuperarEquipos();        
@@ -218,15 +258,17 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
     
     public void llenarComboMiembro(){
         EquipoMiembrosData emd = new EquipoMiembrosData();
-        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(cmbEquipo.getSelectedIndex());
+        Equipo e = (Equipo) cmbEquipo.getSelectedItem();
+        List<EquiposMiembros> miembros = emd.listarEquipoMiembros(e.getIdEquipo());
         for(EquiposMiembros m: miembros){
-            cmbMiembro.addItem(m.getMiembro());
+            cmbMiembro.addItem(m);
         }
     }
     
     public void llenarComboTarea(){
         TareaData td = new TareaData();
-        List<Tarea> tareas = td.listarTareasPorMiembroEquipo(cmbMiembro.getSelectedIndex());
+        EquiposMiembros em = (EquiposMiembros) cmbMiembro.getSelectedItem();
+        List<Tarea> tareas = td.listarTareasPorMiembroEquipo(em.getIdMiembroEq());
         for(Tarea t: tareas){
             cmbTarea.addItem(t);
         }
@@ -245,7 +287,7 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<Equipo> cmbEquipo;
-    private javax.swing.JComboBox<Miembro> cmbMiembro;
+    private javax.swing.JComboBox<EquiposMiembros> cmbMiembro;
     private javax.swing.JComboBox<Tarea> cmbTarea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -255,6 +297,8 @@ public class VistaActualizarTarea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbBuscarMiembros;
+    private javax.swing.JButton jbBuscarTareas;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JTextArea txtComentario;
     // End of variables declaration//GEN-END:variables

@@ -66,7 +66,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizarEstadoTarea">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Actualizar estado de tarea"/>
+                <Property name="text" type="java.lang.String" value="Registrar avance de tarea"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemActualizarEstadoTareaActionPerformed"/>
@@ -127,7 +127,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiMiembro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar Miembro"/>
+                <Property name="text" type="java.lang.String" value="Agregar/Modificar Miembro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiMiembroActionPerformed"/>
