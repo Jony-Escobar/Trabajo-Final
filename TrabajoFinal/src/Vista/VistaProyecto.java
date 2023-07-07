@@ -1,12 +1,17 @@
 package Vista;
 
 import AccesoADatos.EquipoData;
+import AccesoADatos.EquipoMiembrosData;
 import AccesoADatos.ProyectoData;
+import AccesoADatos.TareaData;
 import Modelo.Equipo;
+import Modelo.EquiposMiembros;
 import Modelo.Proyecto;
+import Modelo.Tarea;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -317,6 +322,36 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                 }
             }
             pd.modificarProyecto(pr);
+            
+            if(pr.getEstado() == 0){
+                
+                List<Equipo> equipos = ed.buscarEquipoProyecto(pr.getIdProyecto());
+                List<EquiposMiembros> emFiltrados = new ArrayList();
+                List<Tarea> tareas = new ArrayList();
+                EquipoMiembrosData emd = new EquipoMiembrosData();
+                TareaData td = new TareaData();
+                
+                for(Equipo e: equipos){
+                
+                    List<EquiposMiembros> emSinFiltro = emd.listarEquipoMiembros(e.getIdEquipo());
+                    for(EquiposMiembros emAux: emSinFiltro){
+                        emFiltrados.add(emAux);
+                    }
+                }
+
+                for(EquiposMiembros emAux: emFiltrados){
+
+                    List<Tarea> tareasAux = td.listarTareasPorMiembroEquipo(emAux.getIdMiembroEq());
+                    for(Tarea tareaAux: tareasAux){
+                        tareas.add(tareaAux);
+                    }
+                }
+                
+                for(Tarea t: tareas){
+                    
+                }
+                
+            }
             
             desactivar();
             textFieldID.setEnabled(true);

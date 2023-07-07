@@ -42,7 +42,28 @@ public void guardarTarea(Tarea tarea){
         }
 }
 
+public void modificarTarea(Tarea tarea){
+    String sql= "UPDATE `tarea` SET `nombre`=?,`fechaCreacion`=?,`fechaCierre`=? ,`estado`=? WHERE idTarea=?";
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, tarea.getNombre());
+        ps.setDate(2, Date.valueOf(tarea.getFechaCreacion()));
+        ps.setDate(3, Date.valueOf(tarea.getFechaCierre()));
+        ps.setInt(4, tarea.getEstado());
+        int exito = ps.executeUpdate();
+            
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Tarea modificada exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la Tarea");
+        }
 
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Tarea");
+        }    
+        
+}
     
 public List<Tarea> listarTareasPorMiembroEquipo(int idMiembroEq) {
     List<Tarea> tareas = new ArrayList<>();
