@@ -91,6 +91,32 @@ public Tarea recuperarTarea(int idMiembroEq){
   
     
 }
+
+public Tarea BuscarTarea(int idTarea){
+  Tarea tarea= new Tarea();
+  String sql= "SELECT * FROM tarea WHERE idTarea=?";
+  try{
+   PreparedStatement statement= con.prepareStatement(sql);
+   statement.setInt(1, idTarea);
+   ResultSet resultSet = statement.executeQuery();
+
+        if(resultSet.next()) {
+            tarea = new Tarea();
+            tarea.setIdTarea(resultSet.getInt("idTarea"));
+            tarea.setNombre(resultSet.getString("nombre"));
+            tarea.setFechaCreacion(resultSet.getDate("fechaCreacion").toLocalDate());
+            tarea.setFechaCierre(resultSet.getDate("fechaCierre").toLocalDate());
+            tarea.setEstado(resultSet.getInt("estado"));
+
+            return tarea;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+   return tarea;
+  
+    
+}
     
 public List<Tarea> listarTareasPorMiembroEquipo(int idMiembroEq) {
     List<Tarea> tareas = new ArrayList<>();

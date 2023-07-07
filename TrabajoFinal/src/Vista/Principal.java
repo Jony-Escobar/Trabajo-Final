@@ -29,6 +29,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         menuItemProyectoTareas = new javax.swing.JMenuItem();
         menuItemInformacionDeEquipo = new javax.swing.JMenuItem();
+        jMenuItemComentarios = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
@@ -117,6 +118,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu7.add(menuItemInformacionDeEquipo);
+
+        jMenuItemComentarios.setText("Comentarios de tareas");
+        jMenuItemComentarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemComentariosActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItemComentarios);
 
         jMenuBar1.add(jMenu7);
 
@@ -273,6 +282,15 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vmt);
     }//GEN-LAST:event_jMenuItemModificarTareaActionPerformed
 
+    private void jMenuItemComentariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComentariosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaConsultasAvancesTareas vcat= new VistaConsultasAvancesTareas();
+        vcat.setVisible(true);
+        escritorio.add(vcat);
+        escritorio.moveToFront(vcat);
+    }//GEN-LAST:event_jMenuItemComentariosActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -323,6 +341,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemComentarios;
     private javax.swing.JMenuItem jMenuItemModificarTarea;
     private javax.swing.JMenuItem jmiMiembro;
     private javax.swing.JMenuItem menuItemActualizarEstadoTarea;

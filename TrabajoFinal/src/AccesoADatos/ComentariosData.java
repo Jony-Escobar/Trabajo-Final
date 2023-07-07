@@ -1,12 +1,15 @@
 package AccesoADatos;
 
 import Modelo.Comentarios;
+import Modelo.Tarea;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ComentariosData {
@@ -57,5 +60,33 @@ public class ComentariosData {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla comentarios");
         }
     }
+    
+    public List<Comentarios> listarComentarios(int idTarea) {
+    List<Comentarios> comentarios = new ArrayList<>();
+
+    String sql = "SELECT * FROM comentarios WHERE idTarea = ?";
+    try (
+        PreparedStatement statement = con.prepareStatement(sql)) {
+        statement.setInt(1, idTarea);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Comentarios c = new Comentarios();
+            c.setIdComentario(resultSet.getInt("idComentario"));
+            c.setComentario(resultSet.getString("comentario"));
+            c.setFechaAvance(resultSet.getDate("fechaAvance").toLocalDate());
+            TareaData td = new TareaData();
+            Tarea t = td.BuscarTarea(idTarea);
+            c.setTarea(t);
+           
+
+            comentarios.add(c);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return comentarios;
+}
     
 }
