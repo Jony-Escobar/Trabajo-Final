@@ -25,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuItemAsignarTarea = new javax.swing.JMenuItem();
         menuItemActualizarEstadoTarea = new javax.swing.JMenuItem();
+        jMenuItemModificarTarea = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         menuItemProyectoTareas = new javax.swing.JMenuItem();
         menuItemInformacionDeEquipo = new javax.swing.JMenuItem();
@@ -89,6 +90,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(menuItemActualizarEstadoTarea);
 
+        jMenuItemModificarTarea.setText("Modificar tarea");
+        jMenuItemModificarTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarTareaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemModificarTarea);
+
         jMenuBar1.add(jMenu2);
 
         jMenu7.setText("Consultar");
@@ -113,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Equipo");
 
-        jMenuItem2.setText("Crear Equipo");
+        jMenuItem2.setText("Crear/Modificar Equipo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -255,6 +264,15 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItemModificarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarTareaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaModificarTarea vmt= new VistaModificarTarea();
+        vmt.setVisible(true);
+        escritorio.add(vmt);
+        escritorio.moveToFront(vmt);
+    }//GEN-LAST:event_jMenuItemModificarTareaActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -305,6 +323,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemModificarTarea;
     private javax.swing.JMenuItem jmiMiembro;
     private javax.swing.JMenuItem menuItemActualizarEstadoTarea;
     private javax.swing.JMenuItem menuItemAsignarTarea;

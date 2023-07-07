@@ -51,6 +51,7 @@ public void modificarTarea(Tarea tarea){
         ps.setDate(2, Date.valueOf(tarea.getFechaCreacion()));
         ps.setDate(3, Date.valueOf(tarea.getFechaCierre()));
         ps.setInt(4, tarea.getEstado());
+        ps.setInt(5, tarea.getIdTarea());
         int exito = ps.executeUpdate();
             
         if (exito == 1) {

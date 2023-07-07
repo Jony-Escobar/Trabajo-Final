@@ -348,7 +348,9 @@ public class VistaProyecto extends javax.swing.JInternalFrame {
                 }
                 
                 for(Tarea t: tareas){
-                    
+                    Tarea auxTarea = t;
+                    auxTarea.setEstado(0);
+                    td.modificarTarea(auxTarea);
                 }
                 
             }
