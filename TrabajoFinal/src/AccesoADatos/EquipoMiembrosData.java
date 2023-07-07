@@ -195,11 +195,9 @@ public class EquipoMiembrosData {
     
     public EquiposMiembros EquipoMiembro(int idEquipo, int idMiembro) {
 
-        EquiposMiembros equipomiembro = new EquiposMiembros();
-        PreparedStatement ps= null;
-        EquiposMiembros EM = new EquiposMiembros();
         try {
-           
+           PreparedStatement ps= null;
+            EquiposMiembros EM = new EquiposMiembros();
             String sql = "SELECT * FROM equipoMiembros WHERE idEquipo = ? AND idMiembro=?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, idEquipo);
@@ -216,7 +214,7 @@ public class EquipoMiembrosData {
                 EM.setEquipo(ed.buscarEquipo(rs.getInt("idEquipo"))); //("idMiembroEq")
                 EM.setMiembro(md.buscarMiembro(rs.getInt("idMiembro")));
                 EM.setRol(rs.getString("rol"));
-                //equiposmiembros.add(EM);
+                return EM;
                 
             }
             ps.close();
